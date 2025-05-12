@@ -4,11 +4,12 @@
     <TargetFramework>net9.0</TargetFramework>
     <RootNamespace>Walsun.Erp.IdentityService</RootNamespace>
     <PreserveCompilationReferences>true</PreserveCompilationReferences>
+    <UserSecretsId>Walsun.Erp.IdentityService-9dd26ddb-7277-44db-9417-68a636d138d7</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Keycloak.Net.Core" Version="1.0.20" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.0">
+    <PackageReference Include="Keycloak.Net.Core" Version="1.0.34" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.4">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
   </ItemGroup>

@@ -73,7 +73,7 @@ mkcert -install
 
 Create certificate for the eshopOnAbp domains using the mkcert command below:
 ```powershell
-mkcert "walsun.erp.dev" "*.walsunerp.dev"
+mkcert "walsunerp.dev" "*.walsunerp.dev"
 ```
 
 At the end of the output you will see something like
@@ -84,5 +84,5 @@ Copy the cert name and key name below to create tls secret
 
 ```powershell
 kubectl create namespace erp
-kubectl create secret tls -n erp erp-wildcard-tls --cert=./walsun.erp.dev+1.pem  --key=./walsun.erp.dev+1-key.pem
+kubectl create secret tls -n erp erp-wildcard-tls --cert=./walsunerp.dev+1.pem  --key=./walsunerp.dev+1-key.pem
 ```

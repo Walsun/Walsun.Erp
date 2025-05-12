@@ -74,7 +74,7 @@ stages:
       inputs:
         command: build
         repository: walsunerp/app-web
-        dockerfile: $(buildContextBasePath)/eShopOnAbp/apps/angular/Dockerfile.azure
+        dockerfile: $(buildContextBasePath)/Walsun.Erp/apps/angular/Dockerfile.azure
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
           $(tag)
@@ -109,7 +109,7 @@ stages:
       inputs:
         command: build
         repository: walsunerp/app-publicweb
-        dockerfile: $(buildContextBasePath)/eShopOnAbp/apps/public-web/src/Walsun.Erp.PublicWeb/Dockerfile.azure
+        dockerfile: $(buildContextBasePath)/Walsun.Erp/apps/public-web/src/Walsun.Erp.PublicWeb/Dockerfile.azure
         buildContext: $(buildContextBasePath)
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
@@ -145,7 +145,7 @@ stages:
       inputs:
         command: build
         repository: walsunerp/gateway-web
-        dockerfile: $(buildContextBasePath)/eShopOnAbp/gateways/web/src/Walsun.Erp.WebGateway/Dockerfile.azure
+        dockerfile: $(buildContextBasePath)/Walsun.Erp/gateways/web/src/Walsun.Erp.WebGateway/Dockerfile.azure
         buildContext: $(buildContextBasePath)
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
@@ -181,7 +181,7 @@ stages:
       inputs:
         command: build
         repository: walsunerp/gateway-web-public
-        dockerfile: $(buildContextBasePath)/eShopOnAbp/gateways/web-public/src/Walsun.Erp.WebPublicGateway/Dockerfile.azure
+        dockerfile: $(buildContextBasePath)/Walsun.Erp/gateways/web-public/src/Walsun.Erp.WebPublicGateway/Dockerfile.azure
         buildContext: $(buildContextBasePath)
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
@@ -217,7 +217,7 @@ stages:
       inputs:
         command: build
         repository: walsunerp/service-administration
-        dockerfile: $(buildContextBasePath)/eShopOnAbp/services/administration/src/Walsun.Erp.AdministrationService.HttpApi.Host/Dockerfile.azure
+        dockerfile: $(buildContextBasePath)/Walsun.Erp/services/administration/src/Walsun.Erp.AdministrationService.HttpApi.Host/Dockerfile.azure
         buildContext: $(buildContextBasePath)
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
@@ -253,7 +253,7 @@ stages:
       inputs:
         command: build
         repository: walsunerp/service-basket
-        dockerfile: $(buildContextBasePath)/eShopOnAbp/services/basket/src/Walsun.Erp.BasketService/Dockerfile.azure
+        dockerfile: $(buildContextBasePath)/Walsun.Erp/services/basket/src/Walsun.Erp.BasketService/Dockerfile.azure
         buildContext: $(buildContextBasePath)
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
@@ -289,7 +289,7 @@ stages:
       inputs:
         command: build
         repository: walsunerp/service-catalog
-        dockerfile: $(buildContextBasePath)/eShopOnAbp/services/catalog/src/Walsun.Erp.CatalogService.HttpApi.Host/Dockerfile.azure
+        dockerfile: $(buildContextBasePath)/Walsun.Erp/services/catalog/src/Walsun.Erp.CatalogService.HttpApi.Host/Dockerfile.azure
         buildContext: $(buildContextBasePath)
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
@@ -325,7 +325,7 @@ stages:
       inputs:
         command: build
         repository: walsunerp/service-cmskit
-        dockerfile: $(buildContextBasePath)/eShopOnAbp/services/cmskit/src/Walsun.Erp.CmskitService.HttpApi.Host/Dockerfile.azure
+        dockerfile: $(buildContextBasePath)/Walsun.Erp/services/cmskit/src/Walsun.Erp.CmskitService.HttpApi.Host/Dockerfile.azure
         buildContext: $(buildContextBasePath)
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
@@ -361,7 +361,7 @@ stages:
       inputs:
         command: build
         repository: walsunerp/service-identity
-        dockerfile: $(buildContextBasePath)/eShopOnAbp/services/identity/src/Walsun.Erp.IdentityService.HttpApi.Host/Dockerfile.azure
+        dockerfile: $(buildContextBasePath)/Walsun.Erp/services/identity/src/Walsun.Erp.IdentityService.HttpApi.Host/Dockerfile.azure
         buildContext: $(buildContextBasePath)
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
@@ -397,7 +397,7 @@ stages:
       inputs:
         command: build
         repository: walsunerp/service-ordering
-        dockerfile: $(buildContextBasePath)/eShopOnAbp/services/ordering/src/Walsun.Erp.OrderingService.HttpApi.Host/Dockerfile.azure
+        dockerfile: $(buildContextBasePath)/Walsun.Erp/services/ordering/src/Walsun.Erp.OrderingService.HttpApi.Host/Dockerfile.azure
         buildContext: $(buildContextBasePath)
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
@@ -433,7 +433,7 @@ stages:
       inputs:
         command: build
         repository: walsunerp/service-payment
-        dockerfile: $(buildContextBasePath)/eShopOnAbp/services/payment/src/Walsun.Erp.PaymentService.HttpApi.Host/Dockerfile.azure
+        dockerfile: $(buildContextBasePath)/Walsun.Erp/services/payment/src/Walsun.Erp.PaymentService.HttpApi.Host/Dockerfile.azure
         buildContext: $(buildContextBasePath)
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |

@@ -8,8 +8,8 @@ authserver:
       authority: https://auth.walsunchem.com
       requireHttpsMetadata: "false"
     connectionStrings:
-      administrationService: "Host=erp-az-postgresdb;Port=5432;Database=EShopOnAbp_Administration;User ID=postgres;password=myPassw0rd;Pooling=false"
-      identityService: "Host=erp-az-postgresdb;Port=5432;Database=EShopOnAbp_Identity;User ID=postgres;password=myPassw0rd;Pooling=false"
+      administrationService: "Host=erp-az-postgresdb;Port=5432;Database=WalsunErp_Administration;User ID=postgres;password=myPassw0rd;Pooling=false"
+      identityService: "Host=erp-az-postgresdb;Port=5432;Database=WalsunErp_Identity;User ID=postgres;password=myPassw0rd;Pooling=false"
     dotnetEnv: Production
     redisHost: erp-az-redis
     rabbitmqHost: erp-az-rabbitmq
@@ -70,8 +70,8 @@ identity:
     selfUrl: https://identity.walsunerp.com
     corsOrigins: https://gateway.walsunerp.com,https://gateway-public.walsunerp.com
     connectionStrings:
-      identityService: "Host=erp-az-postgresdb;Port=5432;Database=EShopOnAbp_Identity;User ID=postgres;password=myPassw0rd;Pooling=false"
-      administrationService: "Host=erp-az-postgresdb;Port=5432;Database=EShopOnAbp_Administration;User ID=postgres;password=myPassw0rd;Pooling=false"
+      identityService: "Host=erp-az-postgresdb;Port=5432;Database=WalsunErp_Identity;User ID=postgres;password=myPassw0rd;Pooling=false"
+      administrationService: "Host=erp-az-postgresdb;Port=5432;Database=WalsunErp_Administration;User ID=postgres;password=myPassw0rd;Pooling=false"
     authServer:
       authority: http://erp-az-authserver
       requireHttpsMetadata: "false"
@@ -108,7 +108,7 @@ administration:
     selfUrl: https://administration.walsunerp.com
     corsOrigins: https://gateway.walsunerp.com,https://gateway-public.walsunerp.com,https://erp-az-gateway-internal
     connectionStrings:
-      administrationService: "Host=erp-az-postgresdb;Port=5432;Database=EShopOnAbp_Administration;User ID=postgres;password=myPassw0rd;Pooling=false"
+      administrationService: "Host=erp-az-postgresdb;Port=5432;Database=WalsunErp_Administration;User ID=postgres;password=myPassw0rd;Pooling=false"
     authServer:
       authority: http://erp-az-authserver
       requireHttpsMetadata: "false"      
@@ -211,7 +211,7 @@ basket:
     selfUrl: https://basket.walsunerp.com
     corsOrigins: https://gateway.walsunerp.com,https://gateway-public.walsunerp.com,https://www.walsunerp.com
     connectionStrings:
-      administrationService: "Host=erp-az-postgresdb;Port=5432;Database=EShopOnAbp_Administration;User ID=postgres;password=myPassw0rd;Pooling=false"
+      administrationService: "Host=erp-az-postgresdb;Port=5432;Database=WalsunErp_Administration;User ID=postgres;password=myPassw0rd;Pooling=false"
     authServer:
       authority: http://erp-az-authserver
       requireHttpsMetadata: "false"
@@ -238,8 +238,8 @@ catalog:
     selfUrl: https://catalog.walsunerp.com
     corsOrigins: https://gateway.walsunerp.com,https://gateway-public.walsunerp.com,https://www.walsunerp.com,https://admin.walsunerp.com
     connectionStrings:
-      catalogService: "mongodb://erp-az-mongodb/EShopOnAbp_Catalog"
-      administrationService: "Host=erp-az-postgresdb;Port=5432;Database=EShopOnAbp_Administration;User ID=postgres;password=myPassw0rd;Pooling=false"
+      catalogService: "mongodb://erp-az-mongodb/WalsunErp_Catalog"
+      administrationService: "Host=erp-az-postgresdb;Port=5432;Database=WalsunErp_Administration;User ID=postgres;password=myPassw0rd;Pooling=false"
     authServer:
       authority: http://erp-az-authserver
       requireHttpsMetadata: "false"
@@ -266,8 +266,8 @@ ordering:
     selfUrl: https://order.walsunerp.com
     corsOrigins: https://gateway.walsunerp.com,https://gateway-public.walsunerp.com
     connectionStrings:
-      orderingService: "Host=erp-az-postgresdb;Port=5432;Database=EShopOnAbp_Ordering;User ID=postgres;password=myPassw0rd;Pooling=false"
-      administrationService: "Host=erp-az-postgresdb;Port=5432;Database=EShopOnAbp_Administration;User ID=postgres;password=myPassw0rd;Pooling=false"
+      orderingService: "Host=erp-az-postgresdb;Port=5432;Database=WalsunErp_Ordering;User ID=postgres;password=myPassw0rd;Pooling=false"
+      administrationService: "Host=erp-az-postgresdb;Port=5432;Database=WalsunErp_Administration;User ID=postgres;password=myPassw0rd;Pooling=false"
     authServer:
       authority: http://erp-az-authserver
       requireHttpsMetadata: "false"
@@ -290,8 +290,8 @@ cmskit:
     selfUrl: https://cmskit.walsunerp.com
     corsOrigins: https://gateway.walsunerp.com,https://gateway-public.walsunerp.com
     connectionStrings:
-      cmskitService: "Host=erp-az-postgresdb;Port=5432;Database=EShopOnAbp_Cmskit;User ID=postgres;password=myPassw0rd;Pooling=false"
-      administrationService: "Host=erp-az-postgresdb;Port=5432;Database=EShopOnAbp_Administration;User ID=postgres;password=myPassw0rd;Pooling=false"
+      cmskitService: "Host=erp-az-postgresdb;Port=5432;Database=WalsunErp_Cmskit;User ID=postgres;password=myPassw0rd;Pooling=false"
+      administrationService: "Host=erp-az-postgresdb;Port=5432;Database=WalsunErp_Administration;User ID=postgres;password=myPassw0rd;Pooling=false"
     authServer:
       authority: http://erp-az-authserver
       requireHttpsMetadata: "false"
@@ -317,8 +317,8 @@ payment:
     selfUrl: https://payment.walsunerp.com
     corsOrigins: https://gateway.walsunerp.com,https://gateway-public.walsunerp.com
     connectionStrings:
-      paymentService: "Host=erp-az-postgresdb;Port=5432;Database=EShopOnAbp_Payment;User ID=postgres;password=myPassw0rd;Pooling=false"
-      administrationService: "Host=erp-az-postgresdb;Port=5432;Database=EShopOnAbp_Administration;User ID=postgres;password=myPassw0rd;Pooling=false"
+      paymentService: "Host=erp-az-postgresdb;Port=5432;Database=WalsunErp_Payment;User ID=postgres;password=myPassw0rd;Pooling=false"
+      administrationService: "Host=erp-az-postgresdb;Port=5432;Database=WalsunErp_Administration;User ID=postgres;password=myPassw0rd;Pooling=false"
     authServer:
       authority: http://erp-az-authserver
       requireHttpsMetadata: "false"

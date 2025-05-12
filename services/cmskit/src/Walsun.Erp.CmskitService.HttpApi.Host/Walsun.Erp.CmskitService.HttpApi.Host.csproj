@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.0">
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.4">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
@@ -25,7 +25,7 @@
     <ProjectReference Include="..\Walsun.Erp.CmskitService.Application\Walsun.Erp.CmskitService.Application.csproj" />
     <ProjectReference Include="..\Walsun.Erp.CmskitService.EntityFrameworkCore\Walsun.Erp.CmskitService.EntityFrameworkCore.csproj" />
     <ProjectReference Include="..\Walsun.Erp.CmskitService.HttpApi\Walsun.Erp.CmskitService.HttpApi.csproj" />
-    <PackageReference Include="Volo.Abp.Identity.HttpApi.Client" Version="9.0.0" />
+    <PackageReference Include="Volo.Abp.Identity.HttpApi.Client" Version="9.1.2" />
   </ItemGroup>
 
   <ItemGroup>

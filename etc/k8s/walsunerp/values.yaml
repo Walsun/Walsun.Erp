@@ -38,7 +38,7 @@ web:
 # public-web sub-chart override
 public-web:
   config:
-    selfUrl: https://walsun.erp.dev
+    selfUrl: https://walsunerp.dev
     gatewayUrl: https://gateway-public.walsunerp.dev/
     authServer:
       authority: https://account.walsunerp.dev
@@ -50,7 +50,7 @@ public-web:
     rabbitmqHost: erp-st-rabbitmq
     elasticsearchHost: erp-st-elasticsearch
   ingress:
-    host: walsun.erp.dev
+    host: walsunerp.dev
     tlsSecret: erp-wildcard-tls
   image:
     repository: "walsunerp/app-publicweb"
@@ -62,8 +62,8 @@ identity:
     selfUrl: https://identity.walsunerp.dev
     corsOrigins: https://gateway-web.walsunerp.dev,https://gateway-public.walsunerp.dev
     connectionStrings:
-      identityService: "Host=erp-st-postgresdb;Port=5432;Database=EShopOnAbp_Identity;User ID=postgres;password=myPassw0rd;Pooling=false"
-      administrationService: "Host=erp-st-postgresdb;Port=5432;Database=EShopOnAbp_Administration;User ID=postgres;password=myPassw0rd;Pooling=false"
+      identityService: "Host=erp-st-postgresdb;Port=5432;Database=WalsunErp_Identity;User ID=postgres;password=myPassw0rd;Pooling=false"
+      administrationService: "Host=erp-st-postgresdb;Port=5432;Database=WalsunErp_Administration;User ID=postgres;password=myPassw0rd;Pooling=false"
     authServer:
       authority: http://erp-st-keycloak
       requireHttpsMetadata: "false"
@@ -75,7 +75,7 @@ identity:
     elasticsearchHost: erp-st-elasticsearch    
   identityServerClients: # Seeded Clients
     webRootUrl: https://admin.walsunerp.dev/  
-    publicWebRootUrl: https://walsun.erp.dev/
+    publicWebRootUrl: https://walsunerp.dev/
     webGatewayRootUrl: https://gateway-web.walsunerp.dev/
     publicWebGatewayRootUrl: https://gateway-public.walsunerp.dev/
     identityServiceRootUrl: https://identity.walsunerp.dev/
@@ -99,7 +99,7 @@ administration:
     selfUrl: https://administration.walsunerp.dev
     corsOrigins: https://gateway-web.walsunerp.dev,https://gateway-public.walsunerp.dev
     connectionStrings:
-      administrationService: "Host=erp-st-postgresdb;Port=5432;Database=EShopOnAbp_Administration;User ID=postgres;password=myPassw0rd;Pooling=false"
+      administrationService: "Host=erp-st-postgresdb;Port=5432;Database=WalsunErp_Administration;User ID=postgres;password=myPassw0rd;Pooling=false"
     authServer:
       authority: http://erp-st-keycloak
       requireHttpsMetadata: "false"
@@ -195,9 +195,9 @@ gateway-web-public:
 basket:
   config:
     selfUrl: https://basket.walsunerp.dev
-    corsOrigins: https://gateway-web.walsunerp.dev,https://gateway-public.walsunerp.dev,https://walsun.erp.dev
+    corsOrigins: https://gateway-web.walsunerp.dev,https://gateway-public.walsunerp.dev,https://walsunerp.dev
     connectionStrings:
-      administrationService: "Host=erp-st-postgresdb;Port=5432;Database=EShopOnAbp_Administration;User ID=postgres;password=myPassw0rd;Pooling=false"
+      administrationService: "Host=erp-st-postgresdb;Port=5432;Database=WalsunErp_Administration;User ID=postgres;password=myPassw0rd;Pooling=false"
     authServer:
       authority: http://erp-st-keycloak
       requireHttpsMetadata: "false"
@@ -221,10 +221,10 @@ basket:
 catalog:
   config:
     selfUrl: https://catalog.walsunerp.dev
-    corsOrigins: https://gateway-web.walsunerp.dev,https://gateway-public.walsunerp.dev,https://walsun.erp.dev,https://admin.walsunerp.dev
+    corsOrigins: https://gateway-web.walsunerp.dev,https://gateway-public.walsunerp.dev,https://walsunerp.dev,https://admin.walsunerp.dev
     connectionStrings:
-      catalogService: "mongodb://erp-st-mongodb/EShopOnAbp_Catalog"
-      administrationService: "Host=erp-st-postgresdb;Port=5432;Database=EShopOnAbp_Administration;User ID=postgres;password=myPassw0rd;Pooling=false"
+      catalogService: "mongodb://erp-st-mongodb/WalsunErp_Catalog"
+      administrationService: "Host=erp-st-postgresdb;Port=5432;Database=WalsunErp_Administration;User ID=postgres;password=myPassw0rd;Pooling=false"
     authServer:
       authority: http://erp-st-keycloak
       requireHttpsMetadata: "false"
@@ -252,8 +252,8 @@ ordering:
     selfUrl: https://ordering.walsunerp.dev
     corsOrigins: https://gateway-web.walsunerp.dev,https://gateway-public.walsunerp.dev
     connectionStrings:
-      orderingService: "Host=erp-st-postgresdb;Port=5432;Database=EShopOnAbp_Ordering;User ID=postgres;password=myPassw0rd;Pooling=false"
-      administrationService: "Host=erp-st-postgresdb;Port=5432;Database=EShopOnAbp_Administration;User ID=postgres;password=myPassw0rd;Pooling=false"
+      orderingService: "Host=erp-st-postgresdb;Port=5432;Database=WalsunErp_Ordering;User ID=postgres;password=myPassw0rd;Pooling=false"
+      administrationService: "Host=erp-st-postgresdb;Port=5432;Database=WalsunErp_Administration;User ID=postgres;password=myPassw0rd;Pooling=false"
     authServer:
       authority: http://erp-st-keycloak
       requireHttpsMetadata: "false"
@@ -276,8 +276,8 @@ cmskit:
     selfUrl: https://cmskit.walsunerp.dev
     corsOrigins: https://gateway-web.walsunerp.dev,https://gateway-public.walsunerp.dev
     connectionStrings:
-      cmskitervice: "Host=erp-st-postgresdb;Port=5432;Database=EShopOnAbp_Cmskit;User ID=postgres;password=myPassw0rd;Pooling=false"
-      administrationService: "Host=erp-st-postgresdb;Port=5432;Database=EShopOnAbp_Administration;User ID=postgres;password=myPassw0rd;Pooling=false"
+      cmskitervice: "Host=erp-st-postgresdb;Port=5432;Database=WalsunErp_Cmskit;User ID=postgres;password=myPassw0rd;Pooling=false"
+      administrationService: "Host=erp-st-postgresdb;Port=5432;Database=WalsunErp_Administration;User ID=postgres;password=myPassw0rd;Pooling=false"
     authServer:
       authority: http://erp-st-keycloak
       requireHttpsMetadata: "false"
@@ -304,8 +304,8 @@ payment:
     selfUrl: https://payment.walsunerp.dev
     corsOrigins: https://gateway-web.walsunerp.dev,https://gateway-public.walsunerp.dev
     connectionStrings:
-      paymentService: "Host=erp-st-postgresdb;Port=5432;Database=EShopOnAbp_Payment;User ID=postgres;password=myPassw0rd;Pooling=false"
-      administrationService: "Host=erp-st-postgresdb;Port=5432;Database=EShopOnAbp_Administration;User ID=postgres;password=myPassw0rd;Pooling=false"
+      paymentService: "Host=erp-st-postgresdb;Port=5432;Database=WalsunErp_Payment;User ID=postgres;password=myPassw0rd;Pooling=false"
+      administrationService: "Host=erp-st-postgresdb;Port=5432;Database=WalsunErp_Administration;User ID=postgres;password=myPassw0rd;Pooling=false"
     authServer:
       authority: http://erp-st-keycloak
       requireHttpsMetadata: "false"

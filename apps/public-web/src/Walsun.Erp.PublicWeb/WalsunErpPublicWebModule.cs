@@ -147,7 +147,7 @@ public class WalsunErpPublicWebModule : AbpModule
 
         Configure<AbpMultiTenancyOptions>(options => { options.IsEnabled = true; });
 
-        Configure<AbpDistributedCacheOptions>(options => { options.KeyPrefix = "EShopOnAbp:"; });
+        Configure<AbpDistributedCacheOptions>(options => { options.KeyPrefix = "WalsunErp:"; });
 
         Configure<AppUrlOptions>(options => { options.Applications["MVC"].RootUrl = configuration["App:SelfUrl"]; });
 
@@ -253,8 +253,8 @@ public class WalsunErpPublicWebModule : AbpModule
         var redis = ConnectionMultiplexer.Connect(configuration["Redis:Configuration"]);
         context.Services
             .AddDataProtection()
-            .PersistKeysToStackExchangeRedis(redis, "EShopOnAbp-Protection-Keys")
-            .SetApplicationName("eShopOnAbp-PublicWeb");
+            .PersistKeysToStackExchangeRedis(redis, "WalsunErp-Protection-Keys")
+            .SetApplicationName("WalsunErp-PublicWeb");
 
         Configure<AbpNavigationOptions>(options =>
         {
@@ -281,7 +281,7 @@ public class WalsunErpPublicWebModule : AbpModule
                 });
             });
 
-        context.Services.AddEShopOnAbpHealthChecks();
+        context.Services.AddWalsunErpHealthChecks();
     }
 
     public override void OnApplicationInitialization(ApplicationInitializationContext context)

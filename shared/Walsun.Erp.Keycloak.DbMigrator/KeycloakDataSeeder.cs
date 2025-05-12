@@ -146,14 +146,14 @@ public class KeyCloakDataSeeder : IDataSeedContributor, ITransientDependency
     {
         var administrationClient =
             (await _keycloakClient.GetClientsAsync(_keycloakOptions.RealmName,
-                clientId: "EShopOnAbp_AdministrationService"))
+                clientId: "WalsunErp_AdministrationService"))
             .FirstOrDefault();
 
         if (administrationClient == null)
         {
             administrationClient = new Client()
             {
-                ClientId = "EShopOnAbp_AdministrationService",
+                ClientId = "WalsunErp_AdministrationService",
                 Name = "Administration service client",
                 Protocol = "openid-connect",
                 PublicClient = false,
@@ -174,7 +174,7 @@ public class KeyCloakDataSeeder : IDataSeedContributor, ITransientDependency
             await _keycloakClient.CreateClientAsync(_keycloakOptions.RealmName, administrationClient);
 
             await AddOptionalClientScopesAsync(
-                "EShopOnAbp_AdministrationService",
+                "WalsunErp_AdministrationService",
                 new List<string>
                 {
                     "IdentityService"
@@ -182,7 +182,7 @@ public class KeyCloakDataSeeder : IDataSeedContributor, ITransientDependency
             );
             
             var insertedClient =
-                (await _keycloakClient.GetClientsAsync(_keycloakOptions.RealmName, clientId: "EShopOnAbp_AdministrationService"))
+                (await _keycloakClient.GetClientsAsync(_keycloakOptions.RealmName, clientId: "WalsunErp_AdministrationService"))
                 .First();
             
             var clientIdProtocolMapper = insertedClient.ProtocolMappers.First(q => q.Name == "Client ID");
@@ -197,14 +197,14 @@ public class KeyCloakDataSeeder : IDataSeedContributor, ITransientDependency
     private async Task CreateCmskitClientAsync()
     {
         var cmsKitClient =
-            (await _keycloakClient.GetClientsAsync(_keycloakOptions.RealmName, clientId: "EShopOnAbp_CmskitService"))
+            (await _keycloakClient.GetClientsAsync(_keycloakOptions.RealmName, clientId: "WalsunErp_CmskitService"))
             .FirstOrDefault();
 
         if (cmsKitClient == null)
         {
             cmsKitClient = new Client()
             {
-                ClientId = "EShopOnAbp_CmskitService",
+                ClientId = "WalsunErp_CmskitService",
                 Name = "Cmskit microservice client",
                 Protocol = "openid-connect",
                 PublicClient = false,
@@ -225,7 +225,7 @@ public class KeyCloakDataSeeder : IDataSeedContributor, ITransientDependency
             await _keycloakClient.CreateClientAsync(_keycloakOptions.RealmName, cmsKitClient);
 
             await AddOptionalClientScopesAsync(
-                "EShopOnAbp_CmskitService",
+                "WalsunErp_CmskitService",
                 new List<string>
                 {
                     "IdentityService"
@@ -233,7 +233,7 @@ public class KeyCloakDataSeeder : IDataSeedContributor, ITransientDependency
             );
             
             var insertedClient =
-                (await _keycloakClient.GetClientsAsync(_keycloakOptions.RealmName, clientId: "EShopOnAbp_CmskitService"))
+                (await _keycloakClient.GetClientsAsync(_keycloakOptions.RealmName, clientId: "WalsunErp_CmskitService"))
                 .First();
             
             var clientIdProtocolMapper = insertedClient.ProtocolMappers.First(q => q.Name == "Client ID");

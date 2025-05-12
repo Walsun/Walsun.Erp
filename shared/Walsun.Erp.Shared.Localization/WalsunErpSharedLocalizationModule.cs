@@ -25,7 +25,7 @@ public class WalsunErpSharedLocalizationModule : AbpModule
                 .Add<WalsunErpResource>("en")
                 .AddBaseTypes(
                     typeof(AbpValidationResource)
-                ).AddVirtualJson("/Localization/EShopOnAbp");
+                ).AddVirtualJson("/Localization/WalsunErp");
 
             options.DefaultResourceType = typeof(WalsunErpResource);
         });

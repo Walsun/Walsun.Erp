@@ -8,11 +8,11 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\Walsun.Erp.AdministrationService.EntityFrameworkCore\Walsun.Erp.AdministrationService.EntityFrameworkCore.csproj" />
     <ProjectReference Include="..\Walsun.Erp.AdministrationService.TestBase\Walsun.Erp.AdministrationService.TestBase.csproj" />
-    <PackageReference Include="Volo.Abp.EntityFrameworkCore.Sqlite" Version="9.0.0" />
+    <PackageReference Include="Volo.Abp.EntityFrameworkCore.Sqlite" Version="9.1.2" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.9.1" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.13.0" />
   </ItemGroup>
 
 </Project>

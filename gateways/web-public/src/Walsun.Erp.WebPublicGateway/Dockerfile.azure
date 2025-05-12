@@ -1,10 +1,10 @@
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
-COPY eShopOnAbp ./eShopOnAbp
-WORKDIR /src/eShopOnAbp/gateways/web-public/src/Walsun.Erp.WebPublicGateway
+COPY Walsun.Erp ./Walsun.Erp
+WORKDIR /src/Walsun.Erp/gateways/web-public/src/Walsun.Erp.WebPublicGateway
 RUN dotnet publish -c Release -o bin/Release/publish
 
 FROM mcr.microsoft.com/dotnet/aspnet:8.0  AS final
 WORKDIR /app
-COPY --from=build /src/eShopOnAbp/gateways/web-public/src/Walsun.Erp.WebPublicGateway/bin/Release/publish/ .
+COPY --from=build /src/Walsun.Erp/gateways/web-public/src/Walsun.Erp.WebPublicGateway/bin/Release/publish/ .
 ENTRYPOINT ["dotnet", "Walsun.Erp.WebPublicGateway.dll"]

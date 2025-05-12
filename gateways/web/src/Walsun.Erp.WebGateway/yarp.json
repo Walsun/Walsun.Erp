@@ -7,13 +7,13 @@
           "Path": "/api/abp/{**catch-all}"
         }
       },
-      "EshopOnAbpLocalization": {
+      "WalsunErpLocalization": {
         "ClusterId": "Administration",
         "Match": {
           "Path": "/api/abp/application-localization"
         }
       },
-      "EshopOnAbpApplicationConfiguration": {
+      "WalsunErpApplicationConfiguration": {
         "ClusterId": "Administration",
         "Match": {
           "Path": "/api/abp/application-configuration"

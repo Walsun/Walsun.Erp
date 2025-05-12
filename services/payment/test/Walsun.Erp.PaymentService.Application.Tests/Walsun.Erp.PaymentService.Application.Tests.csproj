@@ -10,7 +10,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\Walsun.Erp.PaymentService.Application\Walsun.Erp.PaymentService.Application.csproj" />
     <ProjectReference Include="..\Walsun.Erp.PaymentService.Domain.Tests\Walsun.Erp.PaymentService.Domain.Tests.csproj" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.11.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.13.0" />
   </ItemGroup>
 
 </Project>

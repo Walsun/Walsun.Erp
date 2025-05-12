@@ -1,4 +1,4 @@
-name: EShopOnAbp
+name: WalsunErp
 services:
 - name: identity-service
   project: services/identity/src/Walsun.Erp.IdentityService.HttpApi.Host/Walsun.Erp.IdentityService.HttpApi.Host.csproj

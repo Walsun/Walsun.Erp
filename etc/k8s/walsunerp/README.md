@@ -1,6 +1,6 @@
 # abp-charts
 
-# eShopOnAbp
+# WalsunErp
 This project is a reference for who want to build microservice solutions with the ABP Framework.
 
 ## Pre-requirement
@@ -44,18 +44,18 @@ mkcert -install
 
 Create certificate for the eshopOnAbp domains using the mkcert command below:
 ```powershell
-mkcert "walsun.erp.dev" "*.walsunerp.dev"
+mkcert "walsunerp.dev" "*.walsunerp.dev"
 ```
 
 At the end of the output you will see something like
 
-The certificate is at "./walsun.erp.dev+1.pem" and the key at "./walsun.erp.dev+1-key.pem"
+The certificate is at "./walsunerp.dev+1.pem" and the key at "./walsunerp.dev+1-key.pem"
 
 Copy the cert name and key name below to create tls secret
 
 ```powershell
 kubectl create namespace erp
-kubectl create secret tls -n erp erp-wildcard-tls --cert=./walsun.erp.dev+1.pem --key=./walsun.erp.dev+1-key.pem
+kubectl create secret tls -n erp erp-wildcard-tls --cert=./walsunerp.dev+1.pem --key=./walsunerp.dev+1-key.pem
 ```
 
 ## How to run?
@@ -64,7 +64,7 @@ kubectl create secret tls -n erp erp-wildcard-tls --cert=./walsun.erp.dev+1.pem 
 
   ````powershell
 127.0.0.1 admin.walsunerp.dev
-127.0.0.1 walsun.erp.dev
+127.0.0.1 walsunerp.dev
 127.0.0.1 account.walsunerp.dev
 127.0.0.1 identity.walsunerp.dev
 127.0.0.1 administration.walsunerp.dev

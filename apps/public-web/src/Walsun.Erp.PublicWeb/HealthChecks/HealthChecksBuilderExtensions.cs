@@ -10,11 +10,11 @@ namespace Walsun.Erp.PublicWeb.HealthChecks;
 
 public static class HealthChecksBuilderExtensions
 {
-    public static void AddEShopOnAbpHealthChecks(this IServiceCollection services)
+    public static void AddWalsunErpHealthChecks(this IServiceCollection services)
     {
         // Add your health checks here
         var healthChecksBuilder = services.AddHealthChecks();
-        healthChecksBuilder.AddCheck<WalsunErpHealthCheck>("EShopOnAbp Health Check");
+        healthChecksBuilder.AddCheck<WalsunErpHealthCheck>("WalsunErp Health Check");
 
         services.ConfigureHealthCheckEndpoint("/health-status");
 
@@ -29,7 +29,7 @@ public static class HealthChecksBuilderExtensions
 
         var healthChecksUiBuilder = services.AddHealthChecksUI(settings =>
         {
-            settings.AddHealthCheckEndpoint("EShopOnAbp Health Status", healthCheckUrl);
+            settings.AddHealthCheckEndpoint("WalsunErp Health Status", healthCheckUrl);
         });
 
         // Set your HealthCheck UI Storage here

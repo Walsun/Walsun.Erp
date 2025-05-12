@@ -6,7 +6,7 @@ export const environment = {
   production: false,
   application: {
     baseUrl,
-    name: 'EShopOnAbp',
+    name: 'WalsunErp',
   },
   oAuthConfig: {
     issuer: 'http://localhost:8080/realms/master',
@@ -19,7 +19,7 @@ export const environment = {
   apis: {
     default: {
       url: 'https://localhost:44372',
-      rootNamespace: 'EShopOnAbp',
+      rootNamespace: 'WalsunErp',
     },
     Catalog: {
       url: 'https://localhost:44354',

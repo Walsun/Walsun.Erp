@@ -10,6 +10,8 @@ This is a reference project for those who want to build microservice solutions w
 ## Issues
 
 Please open issues on the main GitHub repository: https://github.com/abpframework/abp/issues
+Rabbit MQ ref: https://blog.csdn.net/qq_41929714/article/details/146152629
+Rabbit MQ ref: https://blog.csdn.net/weixin_42487712/article/details/145509981
 
 ## How to Run?
 
@@ -62,6 +64,27 @@ Generating a new certificate will fix that issue. To generate a new one,
 - Remove `etc/dev-cert/localhost.pfx`
 
 - Manually execute `create-certificate.ps1` **or** re-run solution with `run-tye.ps1`
+
+
+### KeyCloak
+>[中文指南](https://keycloak.java.net.cn/server/db)
+#### 配置PostgreSQL
+- 安装数据库驱动程序
+	- 下载[`ojdbc17`](https://repo1.maven.org/maven2/com/oracle/database/jdbc/ojdbc17/23.6.0.24.10/ojdbc17-23.6.0.24.10.jar)
+	- 下载[`orai18n`](https://repo1.maven.org/maven2/com/oracle/database/nls/orai18n/23.6.0.24.10/orai18n-23.6.0.24.10.jar)
+	- 将下载的`ojdbc17.jar`和`orai18n.jar`放到`KeyCloak`的`providers`目录下
+- 数据库准备
+	- 安装`PostgreSQL 17`
+	- 添加用户 ```CREATE USER keycloak WITH PASSWORD 'your-password';```
+	- 创建数据库 `keycloak`<img src="docs/images/create-db-keycloak.png" height="320"/>
+- 修改`KeyCloak`配置 `conf/keycloak.conf`
+```sh
+db=postgres
+db-username=keycloak
+db-password=your-password
+db-url=jdbc:postgresql://localhost/keycloak
+```
+- 启动`KeyCloak`服务，如：`kc start-dev`
 
 
 ## Roadmap

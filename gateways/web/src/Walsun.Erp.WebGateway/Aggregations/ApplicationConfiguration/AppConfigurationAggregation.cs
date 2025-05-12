@@ -10,7 +10,7 @@ namespace Walsun.Erp.WebGateway.Aggregations.ApplicationConfiguration;
 public class AppConfigurationAggregation : AggregateServiceBase<ApplicationConfigurationDto>,
     IAppConfigurationAggregation, ITransientDependency
 {
-    public string AppConfigRouteName => "EshopOnAbpApplicationConfiguration";
+    public string AppConfigRouteName => "WalsunErpApplicationConfiguration";
     public string AppConfigEndpoint => "api/abp/application-configuration";
 
     protected IAppConfigurationRemoteService AppConfigurationRemoteService { get; }

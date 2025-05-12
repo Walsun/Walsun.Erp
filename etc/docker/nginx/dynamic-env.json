@@ -2,7 +2,7 @@
   "production": true,
   "application": {
     "baseUrl":"https://erp-st-web",
-    "name": "EShopOnAbp",
+    "name": "WalsunErp",
     "logoUrl": ""
   },
   "oAuthConfig": {
@@ -17,7 +17,7 @@
   "apis": {
     "default": {
       "url": "https://erp-st-gateway-web",
-      "rootNamespace": "EShopOnAbp"
+      "rootNamespace": "WalsunErp"
     }
   }
 }

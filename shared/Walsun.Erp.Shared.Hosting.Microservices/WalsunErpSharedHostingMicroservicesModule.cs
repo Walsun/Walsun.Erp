@@ -34,13 +34,13 @@ public class WalsunErpSharedHostingMicroservicesModule : AbpModule
 
         Configure<AbpDistributedCacheOptions>(options =>
         {
-            options.KeyPrefix = "EShopOnAbp:";
+            options.KeyPrefix = "WalsunErp:";
         });
 
         var redis = ConnectionMultiplexer.Connect(configuration["Redis:Configuration"]!);
         context.Services
             .AddDataProtection()
-            .PersistKeysToStackExchangeRedis(redis, "EShopOnAbp-Protection-Keys");
+            .PersistKeysToStackExchangeRedis(redis, "WalsunErp-Protection-Keys");
             
         context.Services.AddSingleton<IDistributedLockProvider>(sp =>
         {

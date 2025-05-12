@@ -10,7 +10,7 @@ config:
   redisHost: #
   rabbitmqHost: #
   elasticsearchHost: #
-  stringEncryptionDefaultPassPhrase: gsKnGZ041HLL4IM8
+  stringEncryptionDefaultPassPhrase: yAGSYC55gxT6p7dX
 reRoutes:
   identityService:
     url: http://erp-st-identity

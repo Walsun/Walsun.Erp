@@ -32,12 +32,12 @@ namespace Walsun.Erp.PublicWeb.ServiceProviders
         // Get anonymous user id from cookie
         private async Task<string> GetAnonymousUserId()
         {
-            HttpContext.Request.Cookies.TryGetValue(EShopConstants.AnonymousUserClaimName, out string anonymousUserId);
+            HttpContext.Request.Cookies.TryGetValue(ErpConstants.AnonymousUserClaimName, out string anonymousUserId);
             // Generate guid for anonymous user id and set to cookie for 14 days
             if (string.IsNullOrEmpty(anonymousUserId))
             {
                 anonymousUserId = Guid.NewGuid().ToString();
-                HttpContext.Response.Cookies.Append(EShopConstants.AnonymousUserClaimName, anonymousUserId,
+                HttpContext.Response.Cookies.Append(ErpConstants.AnonymousUserClaimName, anonymousUserId,
                     new CookieOptions
                     {
                         SameSite = SameSiteMode.Lax,

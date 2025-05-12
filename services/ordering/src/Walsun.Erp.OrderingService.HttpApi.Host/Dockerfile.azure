@@ -1,10 +1,10 @@
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
-COPY eShopOnAbp ./eShopOnAbp
-WORKDIR /src/eShopOnAbp/services/ordering/src/Walsun.Erp.OrderingService.HttpApi.Host
+COPY Walsun.Erp ./Walsun.Erp
+WORKDIR /src/Walsun.Erp/services/ordering/src/Walsun.Erp.OrderingService.HttpApi.Host
 RUN dotnet publish -c Release -o bin/Release/publish
 
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final
 WORKDIR /app
-COPY --from=build /src/eShopOnAbp/services/ordering/src/Walsun.Erp.OrderingService.HttpApi.Host/bin/Release/publish/ .
+COPY --from=build /src/Walsun.Erp/services/ordering/src/Walsun.Erp.OrderingService.HttpApi.Host/bin/Release/publish/ .
 ENTRYPOINT ["dotnet", "Walsun.Erp.OrderingService.HttpApi.Host.dll"]

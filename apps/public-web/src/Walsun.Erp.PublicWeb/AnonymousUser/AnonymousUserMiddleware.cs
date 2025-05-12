@@ -19,12 +19,12 @@ public class AnonymousUserMiddleware
     {
         if (context.Request.Method == "GET")
         {
-            context.Request.Cookies.TryGetValue(EShopConstants.AnonymousUserClaimName, out string anonymousUserId);
+            context.Request.Cookies.TryGetValue(ErpConstants.AnonymousUserClaimName, out string anonymousUserId);
             // Generate guid for anonymous user id and set to cookie for 14 days
             if (string.IsNullOrEmpty(anonymousUserId))
             {
                 anonymousUserId = Guid.NewGuid().ToString();
-                context.Response.Cookies.Append(EShopConstants.AnonymousUserClaimName, anonymousUserId,
+                context.Response.Cookies.Append(ErpConstants.AnonymousUserClaimName, anonymousUserId,
                     new CookieOptions
                     {
                         SameSite = SameSiteMode.Lax,
