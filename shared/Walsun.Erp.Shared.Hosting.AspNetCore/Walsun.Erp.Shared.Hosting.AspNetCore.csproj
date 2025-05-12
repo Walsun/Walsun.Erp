@@ -1,0 +1,39 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <RootNamespace>Walsun.Erp.Shared.Hosting.AspNetCore</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Serilog.AspNetCore" Version="8.0.1" />
+        <PackageReference Include="Volo.Abp.AspNetCore.Serilog" Version="9.0.0" />
+        <PackageReference Include="Volo.Abp.Swashbuckle" Version="9.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\aspire\ServiceDefaults\Walsun.Erp.ServiceDefaults.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>        
+        <ProjectReference Include="..\Walsun.Erp.Shared.Hosting\Walsun.Erp.Shared.Hosting.csproj" />
+        <ProjectReference Include="..\Walsun.Erp.Shared.Localization\Walsun.Erp.Shared.Localization.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Remove="wwwroot\swagger\ui\requestinterceptor.js" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Include="wwwroot\swagger\ui\requestinterceptor.js">
+        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+        <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Include="wwwroot\swagger\ui\requestinterceptor.js" />
+    </ItemGroup>
+
+</Project>

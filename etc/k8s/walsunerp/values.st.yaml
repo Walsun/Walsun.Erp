@@ -1,0 +1,432 @@
+# auth-server sub-chart override
+keycloak:
+  config:
+    kcDb: postgres
+    kcDbUrl: jdbc:postgresql://erp-st-postgresdb:5432/keycloak
+    kcDbUrlHost: erp-st-postgresdb
+    kcDbUrlPort: 5432
+    kcDbUrlDatabase: keycloak
+    kcDbUsername: postgres
+    kcDbPassword: myPassw0rd
+    keycloakAdmin: admin
+    keycloakAdminPassword: 1q2w3E*
+    kcHealthEnabled: true
+    kcHttpRelativePath : /
+    kcProxy: edge
+    proxyAddressForwarding: true
+    kcHttpEnabled: true
+    kcHostnameUrl: https://account.walsunerp.dev
+    kcHostnameAdminUrl: https://account.walsunerp.dev
+    jgroupsDnsQuery: erp-st-keycloak:8080
+    kcHostnameStrictBackchannel: false
+
+  ingress:
+    host: account.walsunerp.dev
+    tlsSecret: erp-wildcard-tls
+  image:
+    repository: quay.io/keycloak/keycloak
+    tag: 21.1.1
+    pullPolicy: IfNotPresent
+
+# web sub-chart override
+web:
+  config:
+    selfUrl: https://admin.walsunerp.dev
+    gatewayUrl: https://gateway-web.walsunerp.dev
+    authServer:
+      authority: https://account.walsunerp.dev/realms/master
+      requireHttpsMetadata: false
+      responseType: "code"
+      strictDiscoveryDocumentValidation: false
+      skipIssuerCheck: true
+  ingress:
+    host: admin.walsunerp.dev
+    tlsSecret: erp-wildcard-tls
+  image:
+    repository: "walsunerp/app-web"
+    tag: "latest"
+
+# public-web sub-chart override
+public-web:
+  config:
+    selfUrl: https://walsun.erp.dev
+    gatewayUrl: http://erp-st-gateway-web-public:8080/
+    authServer:
+      authority: https://account.walsunerp.dev/realms/master
+      requireHttpsMetadata: "false"
+      isOnProd: "true"
+      metaAddress: http://erp-st-keycloak/realms/master
+    dotnetEnv: Staging
+    redisHost: erp-st-redis
+    rabbitmqHost: erp-st-rabbitmq
+    elasticsearchHost: erp-st-elasticsearch
+  ingress:
+    host: walsun.erp.dev
+    tlsSecret: erp-wildcard-tls
+  image:
+    repository: "walsunerp/app-publicweb"
+    tag: "latest"
+
+# identity-service sub-chart override
+identity:
+  config:
+    selfUrl: https://identity.walsunerp.dev
+    corsOrigins: https://gateway-web.walsunerp.dev,https://gateway-public.walsunerp.dev,https://admin.walsunerp.dev
+    connectionStrings:
+      identityService: "Host=erp-st-postgresdb;Port=5432;Database=EShopOnAbp_Identity;User ID=postgres;password=myPassw0rd;Pooling=false"
+      administrationService: "Host=erp-st-postgresdb;Port=5432;Database=EShopOnAbp_Administration;User ID=postgres;password=myPassw0rd;Pooling=false"
+    keycloak:
+      url: http://erp-st-keycloak
+      adminUsername: admin
+      adminPassword: 1q2w3E*
+      realmName: master
+    authServer:
+      authority: https://account.walsunerp.dev/realms/master
+      requireHttpsMetadata: "false"
+      metadataAddress: https://account.walsunerp.dev/realms/master
+      swaggerClientId: SwaggerClient
+    dotnetEnv: Staging
+    redisHost: erp-st-redis
+    rabbitmqHost: erp-st-rabbitmq
+    elasticsearchHost: erp-st-elasticsearch    
+  keycloakClients: # Seeded Clients
+    webRootUrl: https://admin.walsunerp.dev/  
+    publicWebRootUrl: https://walsun.erp.dev/
+    webGatewayRootUrl: https://gateway-web.walsunerp.dev/
+    publicWebGatewayRootUrl: https://gateway-public.walsunerp.dev/
+    identityServiceRootUrl: https://identity.walsunerp.dev/
+    administrationServiceRootUrl: https://administration.walsunerp.dev/
+    accountServiceRootUrl: https://account.walsunerp.dev/
+    basketServiceRootUrl: https://basket.walsunerp.dev/
+    catalogServiceRootUrl: https://catalog.walsunerp.dev/
+    orderingServiceRootUrl: https://ordering.walsunerp.dev/
+    cmskitServiceRootUrl: https://cmskit.walsunerp.dev/
+    paymentServiceRootUrl: https://payment.walsunerp.dev/
+  ingress:
+    host: identity.walsunerp.dev
+    tlsSecret: erp-wildcard-tls
+  image:
+    repository: "walsunerp/service-identity"
+    tag: "latest"
+
+# administration sub-chart override
+administration:
+  config:
+    selfUrl: https://administration.walsunerp.dev
+    corsOrigins: https://gateway-web.walsunerp.dev,https://gateway-public.walsunerp.dev,https://admin.walsunerp.dev
+    connectionStrings:
+      administrationService: "Host=erp-st-postgresdb;Port=5432;Database=EShopOnAbp_Administration;User ID=postgres;password=myPassw0rd;Pooling=false"
+    authServer:
+      authority: https://account.walsunerp.dev/realms/master
+      requireHttpsMetadata: "false"
+      metadataAddress: https://account.walsunerp.dev/realms/master
+      swaggerClientId: SwaggerClient
+    remoteServices:
+      abpIdentityBaseUrl: http://identity.walsunerp.dev
+      useCurrentToken: "false"  
+    dotnetEnv: Staging
+    redisHost: erp-st-redis
+    rabbitmqHost: erp-st-rabbitmq
+    elasticsearchHost: erp-st-elasticsearch
+  synchedCommunication: # Used for server-to-server (client-credentials) communication with identityService for user permissions
+    authority: http://account.walsunerp.dev
+  ingress:
+    host: administration.walsunerp.dev
+    tlsSecret: erp-wildcard-tls
+  image:
+    repository: "walsunerp/service-administration"
+    tag: "latest"
+
+# gateway-web sub-chart override
+gateway-web:
+  config:
+    selfUrl: https://gateway-web.walsunerp.dev
+    corsOrigins: http://admin.walsunerp.dev,https://admin.walsunerp.dev
+    authServer:
+      authority: http://account.walsunerp.dev
+      requireHttpsMetadata: "false"
+      swaggerClientId: SwaggerClient
+    dotnetEnv: Staging
+    redisHost: erp-st-redis
+    rabbitmqHost: erp-st-rabbitmq
+    elasticsearchHost: erp-st-elasticsearch
+  ingress:
+    host: gateway-web.walsunerp.dev
+    tlsSecret: erp-wildcard-tls
+  image:
+    repository: "walsunerp/gateway-web"
+    tag: "latest"
+  reRoutes:
+    identityService:
+      url: http://erp-st-identity:8080
+      dns: https://identity.walsunerp.dev
+    administrationService:
+      url: http://erp-st-administration:8080
+      dns: https://administration.walsunerp.dev
+    catalogService:
+      url: http://erp-st-catalog:8080
+      dns: https://catalog.walsunerp.dev
+    orderingService:
+      url: http://erp-st-ordering:8080
+      dns: https://ordering.walsunerp.dev
+    cmskitService:
+      url: http://erp-st-cmskit:8080
+      dns: https://cmskit.walsunerp.dev
+
+# gateway-web-public sub-chart override
+gateway-web-public:
+  config:
+    selfUrl: https://gateway-public.walsunerp.dev
+    authServer:
+      authority: https://account.walsunerp.dev/realms/master
+      requireHttpsMetadata: "false"
+      metadataAddress: https://account.walsunerp.dev/realms/master
+      swaggerClientId: SwaggerClient
+    dotnetEnv: Staging
+    redisHost: erp-st-redis
+    rabbitmqHost: erp-st-rabbitmq
+    elasticsearchHost: erp-st-elasticsearch
+  ingress:
+    host: gateway-public.walsunerp.dev
+    tlsSecret: erp-wildcard-tls
+  image:
+    repository: "walsunerp/gateway-web-public"
+    tag: "latest"
+  reRoutes:
+    identityService:
+      url: http://erp-st-identity:8080
+      dns: https://identity.walsunerp.dev
+    administrationService:
+      url: http://erp-st-administration:8080
+      dns: https://administration.walsunerp.dev
+    catalogService:
+      url: http://erp-st-catalog:8080
+      dns: https://catalog.walsunerp.dev
+    basketService:
+      url: http://erp-st-basket:8080
+      dns: https://basket.walsunerp.dev
+    orderingService:
+      url: http://erp-st-ordering:8080
+      dns: https://ordering.walsunerp.dev
+    cmskitService:
+      url: http://erp-st-cmskit:8080
+      dns: https://cmskit.walsunerp.dev
+    paymentService:
+      url: http://erp-st-payment:8080
+      dns: https://payment.walsunerp.dev
+
+# basket-service sub-chart override
+basket:
+  config:
+    selfUrl: https://basket.walsunerp.dev
+    corsOrigins: https://gateway-web.walsunerp.dev,https://gateway-public.walsunerp.dev,https://walsun.erp.dev
+    connectionStrings:
+      administrationService: "Host=erp-st-postgresdb;Port=5432;Database=EShopOnAbp_Administration;User ID=postgres;password=myPassw0rd;Pooling=false"
+    authServer:
+      authority: https://account.walsunerp.dev/realms/master
+      requireHttpsMetadata: "false"
+      metadataAddress: https://account.walsunerp.dev/realms/master
+      swaggerClientId: SwaggerClient
+    dotnetEnv: Staging
+    redisHost: erp-st-redis
+    rabbitmqHost: erp-st-rabbitmq
+    elasticsearchHost: erp-st-elasticsearch
+    remoteServices:
+      catalogBaseUrl: http://erp-st-catalog:8080
+      catalogGrpcUrl: http://erp-st-catalog:81
+  ingress:
+    host: basket.walsunerp.dev
+    tlsSecret: erp-wildcard-tls
+  image:
+    repository: "walsunerp/service-basket"
+    tag: "latest"
+
+# catalog-service sub-chart override
+catalog:
+  config:
+    selfUrl: https://catalog.walsunerp.dev
+    corsOrigins: https://gateway-web.walsunerp.dev,https://gateway-public.walsunerp.dev,https://walsun.erp.dev,https://admin.walsunerp.dev
+    connectionStrings:
+      catalogService: "mongodb://erp-st-mongodb/EShopOnAbp_Catalog"
+      administrationService: "Host=erp-st-postgresdb;Port=5432;Database=EShopOnAbp_Administration;User ID=postgres;password=myPassw0rd;Pooling=false"
+    authServer:
+      authority: https://account.walsunerp.dev/realms/master
+      requireHttpsMetadata: "false"
+      metadataAddress: https://account.walsunerp.dev/realms/master
+      swaggerClientId: SwaggerClient
+    dotnetEnv: Staging
+    redisHost: erp-st-redis
+    rabbitmqHost: erp-st-rabbitmq
+    elasticsearchHost: erp-st-elasticsearch
+    kestrel:
+      httpUrl: http://erp-st-catalog:8080
+      httpProtocols: Http1AndHttp2
+      grpcUrl: http://erp-st-catalog:81
+      grpcProtocols: Http2
+  ingress:
+    host: catalog.walsunerp.dev
+    tlsSecret: erp-wildcard-tls
+  image:
+    repository: "walsunerp/service-catalog"
+    tag: "latest"
+
+# ordering-service sub-chart override
+ordering:
+  config:
+    selfUrl: https://ordering.walsunerp.dev
+    corsOrigins: https://gateway-web.walsunerp.dev,https://gateway-public.walsunerp.dev,https://admin.walsunerp.dev
+    connectionStrings:
+      orderingService: "Host=erp-st-postgresdb;Port=5432;Database=EShopOnAbp_Ordering;User ID=postgres;password=myPassw0rd;Pooling=false"
+      administrationService: "Host=erp-st-postgresdb;Port=5432;Database=EShopOnAbp_Administration;User ID=postgres;password=myPassw0rd;Pooling=false"
+    authServer:
+      authority: https://account.walsunerp.dev/realms/master
+      requireHttpsMetadata: "false"
+      metadataAddress: https://account.walsunerp.dev/realms/master
+      swaggerClientId: SwaggerClient
+    dotnetEnv: Staging
+    redisHost: erp-st-redis
+    rabbitmqHost: erp-st-rabbitmq
+    elasticsearchHost: erp-st-elasticsearch
+  ingress:
+    host: ordering.walsunerp.dev
+    tlsSecret: erp-wildcard-tls
+  image:
+    repository: "walsunerp/service-ordering"
+    tag: "latest"
+
+# cmskit-service sub-chart override
+cmskit:
+  config:
+    selfUrl: https://cmskit.walsunerp.dev
+    corsOrigins: https://gateway-web.walsunerp.dev,https://gateway-public.walsunerp.dev,https://admin.walsunerp.dev
+    connectionStrings:
+      cmskitService: "Host=erp-st-postgresdb;Port=5432;Database=EShopOnAbp_Cmskit;User ID=postgres;password=myPassw0rd;Pooling=false"
+      administrationService: "Host=erp-st-postgresdb;Port=5432;Database=EShopOnAbp_Administration;User ID=postgres;password=myPassw0rd;Pooling=false"
+    authServer:
+      authority: https://account.walsunerp.dev/realms/master
+      requireHttpsMetadata: "false"
+      metadataAddress: https://account.walsunerp.dev/realms/master
+      swaggerClientId: SwaggerClient
+    remoteServices:
+      abpIdentityBaseUrl: https://identity.walsunerp.dev
+    dotnetEnv: Staging
+    redisHost: erp-st-redis
+    rabbitmqHost: erp-st-rabbitmq
+    elasticsearchHost: erp-st-elasticsearch
+  synchedCommunication: # Used for server-to-server (client-credentials) communication with identityService for user permissions
+    authority: http://account.walsunerp.dev
+  ingress:
+    host: cmskit.walsunerp.dev
+    tlsSecret: erp-wildcard-tls
+  image:
+    repository: "walsunerp/service-cmskit"
+    tag: "latest"
+
+# payment-service sub-chart override
+payment:
+  config:
+    selfUrl: https://payment.walsunerp.dev
+    corsOrigins: https://gateway-web.walsunerp.dev,https://gateway-public.walsunerp.dev,https://admin.walsunerp.dev
+    connectionStrings:
+      paymentService: "Host=erp-st-postgresdb;Port=5432;Database=EShopOnAbp_Payment;User ID=postgres;password=myPassw0rd;Pooling=false"
+      administrationService: "Host=erp-st-postgresdb;Port=5432;Database=EShopOnAbp_Administration;User ID=postgres;password=myPassw0rd;Pooling=false"
+    authServer:
+      authority: http://account.walsunerp.dev
+      requireHttpsMetadata: "false"
+      metadataAddress: https://account.walsunerp.dev/realms/master
+      swaggerClientId: SwaggerClient
+    remoteServices:
+      abpIdentityBaseUrl: https://identity.walsunerp.dev
+    dotnetEnv: Staging
+    redisHost: erp-st-redis
+    rabbitmqHost: erp-st-rabbitmq
+    elasticsearchHost: erp-st-elasticsearch
+  ingress:
+    host: payment.walsunerp.dev
+    tlsSecret: erp-wildcard-tls
+  image:
+    repository: "walsunerp/service-payment"
+    tag: "latest"
+
+# Default values for Walsun.Erp.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: nginx
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+podAnnotations: {}
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: false
+  className: ""
+  annotations: {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  hosts:
+    - host: chart-example.local
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

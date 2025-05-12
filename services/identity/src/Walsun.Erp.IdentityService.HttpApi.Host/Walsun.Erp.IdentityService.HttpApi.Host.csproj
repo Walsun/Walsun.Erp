@@ -1,0 +1,35 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <RootNamespace>Walsun.Erp.IdentityService</RootNamespace>
+    <PreserveCompilationReferences>true</PreserveCompilationReferences>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Keycloak.Net.Core" Version="1.0.20" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.0">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\aspire\ServiceDefaults\Walsun.Erp.ServiceDefaults.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\shared\Walsun.Erp.Shared.Hosting.Gateways\Walsun.Erp.Shared.Hosting.Gateways.csproj" />
+    <ProjectReference Include="..\..\..\..\shared\Walsun.Erp.Shared.Hosting.Microservices\Walsun.Erp.Shared.Hosting.Microservices.csproj" />
+    <ProjectReference Include="..\Walsun.Erp.IdentityService.Application\Walsun.Erp.IdentityService.Application.csproj" />
+    <ProjectReference Include="..\Walsun.Erp.IdentityService.EntityFrameworkCore\Walsun.Erp.IdentityService.EntityFrameworkCore.csproj" />
+    <ProjectReference Include="..\Walsun.Erp.IdentityService.HttpApi\Walsun.Erp.IdentityService.HttpApi.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Logs\**" />
+    <Content Remove="Logs\**" />
+    <EmbeddedResource Remove="Logs\**" />
+    <None Remove="Logs\**" />
+  </ItemGroup>
+  
+</Project>

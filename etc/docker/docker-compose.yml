@@ -1,0 +1,378 @@
+version: '3.7'
+
+services:
+  lb:
+    image: nginx:1.21
+    container_name: load-balancer-container
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./nginx/certs/erp-st-web+10.pem:/etc/nginx/certs/app-cert.pem:ro
+      - ./nginx/certs/erp-st-web+10-key.pem:/etc/nginx/certs/app-cert-key.pem:ro
+      - ./nginx/conf.d:/etc/nginx/conf.d:ro
+    depends_on:
+      - erp-st-administration
+      - erp-st-authserver
+      - erp-st-identity
+      - erp-st-basket
+      - erp-st-catalog
+      - erp-st-ordering
+      - erp-st-cmskit
+      - erp-st-payment
+      - erp-st-web
+      - erp-st-public-web
+      - erp-st-gateway-web-public
+      - erp-st-gateway-web
+    restart: on-failure
+    networks:
+      - walsun-erp-network
+
+  erp-st-administration:
+    image: walsunerp/service-administration:latest
+    container_name: administration-service-container
+    build:
+      context: ../../
+      dockerfile: services/administration/src/Walsun.Erp.AdministrationService.HttpApi.Host/Dockerfile
+    environment:
+      # - ASPNETCORE_ENVIRONMENT=Docker
+      - ASPNETCORE_URLS=http://+:80
+      - App__SelfUrl=https://erp-st-administration
+      - App__CorsOrigins=https://gateway-web,gateway-web-public
+      - RemoteServices__AbpIdentity__BaseUrl=erp-st-identity
+      - RemoteServices__AbpIdentity__UseCurrentAccessToken=false
+      - ConnectionStrings__AdministrationService=User ID=postgres;Password=myPassw0rd;Host=postgres-db;Port=5432;Database=EShopOnAbp_Administration;Pooling=false;
+      - AuthServer__Authority=http://erp-st-authserver
+      - AuthServer__RequireHttpsMetadata=false
+      - IdentityClients__Default__Authority=http://erp-st-identity
+      - Redis__Configuration=redis
+      - RabbitMQ__Connections__Default__HostName=rabbitmq
+    depends_on:
+      redis:
+        condition: service_healthy
+      postgres-db:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    restart: on-failure
+    networks: 
+      - walsun-erp-network
+  erp-st-identity:
+    image: walsunerp/service-identity:latest
+    container_name: identity-service-container
+    build:
+      context: ../../
+      dockerfile: services/identity/src/Walsun.Erp.IdentityService.HttpApi.Host/Dockerfile
+    environment:
+      # - ASPNETCORE_ENVIRONMENT=Docker
+      - ASPNETCORE_URLS=http://+:80
+      - App__SelfUrl=https://erp-st-identity
+      - App__CorsOrigins=https://gateway-web,gateway-web-public
+      - AuthServer__Authority=http://erp-st-authserver
+      - AuthServer__RequireHttpsMetadata=false
+      - ConnectionStrings__IdentityService=User ID=postgres;Password=myPassw0rd;Host=postgres-db;Port=5432;Database=EShopOnAbp_Identity;Pooling=false;
+      - ConnectionStrings__AdministrationService=User ID=postgres;Password=myPassw0rd;Host=postgres-db;Port=5432;Database=EShopOnAbp_Administration;Pooling=false;
+      - Redis__Configuration=redis
+      - RabbitMQ__Connections__Default__HostName=rabbitmq
+      - IdentityServerClients__Web__RootUrl=https://erp-st-web
+      - IdentityServerClients__PublicWeb__RootUrl=https://erp-st-public-web
+      - IdentityServerClients__WebGateway__RootUrl=https://erp-st-gateway-web
+      - IdentityServerClients__PublicWebGateway__RootUrl=https://erp-st-gateway-web-public
+      - IdentityServerClients__IdentityService__RootUrl=https://erp-st-identity
+      - IdentityServerClients__AdministrationService__RootUrl=https://erp-st-administration
+      - IdentityServerClients__AccountService__RootUrl=https://erp-st-authserver
+      - IdentityServerClients__CatalogService__RootUrl=https://erp-st-catalog
+      - IdentityServerClients__BasketService__RootUrl=https://erp-st-basket     
+      - IdentityServerClients__OrderingService__RootUrl=https://erp-st-ordering
+      - IdentityServerClients__CmskitService__RootUrl=https://erp-st-cmskit
+      - IdentityServerClients__PaymentService__RootUrl=https://erp-st-payment
+    depends_on:
+      redis:
+        condition: service_healthy
+      postgres-db:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    restart: on-failure
+    networks: 
+      - walsun-erp-network
+  erp-st-catalog:
+    image: walsunerp/service-catalog:latest
+    container_name: catalog-service-container
+    build:
+      context: ../../
+      dockerfile: services/catalog/src/Walsun.Erp.CatalogService.HttpApi.Host/Dockerfile
+    environment:
+      # - ASPNETCORE_ENVIRONMENT=Docker
+      - ASPNETCORE_URLS=http://+:80;http://+:81;
+      - App__SelfUrl=https://erp-st-catalog
+      - App__CorsOrigins=https://erp-st-gateway-web,https://erp-st-gateway-web-public,https://erp-st-public-web,https://erp-st-web
+      - AuthServer__Authority=http://erp-st-authserver
+      - AuthServer__RequireHttpsMetadata=false
+      - Kestrel__EndPoints__Http__Url=http://docker.host.internal:80
+      - Kestrel__EndPoints__gRPC__Url=http://docker.host.internal:81
+      - Kestrel__EndPoints__gRPC__Protocols=Http2
+      - ConnectionStrings__CatalogService=mongodb://mongodb/EShopOnAbp_Catalog
+      - ConnectionStrings__AdministrationService=User ID=postgres;Password=myPassw0rd;Host=postgres-db;Port=5432;Database=EShopOnAbp_Administration;Pooling=false;
+      - Redis__Configuration=redis
+      - RabbitMQ__Connections__Default__HostName=rabbitmq
+    depends_on:
+      redis:
+        condition: service_healthy
+      mongodb:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    restart: on-failure  
+    networks: 
+      - walsun-erp-network
+  erp-st-basket:
+    image: walsunerp/service-basket:latest
+    container_name: basket-service-container
+    build:
+      context: ../../
+      dockerfile: services/basket/src/Walsun.Erp.BasketService/Dockerfile
+    environment:
+      # - ASPNETCORE_ENVIRONMENT=Docker
+      - ASPNETCORE_URLS=http://+:80
+      - App__SelfUrl=https://erp-st-basket
+      - App__CorsOrigins=https://erp-st-gateway-web,https://erp-st-gateway-web-public,https://erp-st-public-web
+      - RemoteServices__Catalog__BaseUrl=http://erp-st-catalog:80
+      - RemoteServices__Catalog__GrpcUrl=http://erp-st-catalog:81
+      - ConnectionStrings__AdministrationService=User ID=postgres;Password=myPassw0rd;Host=postgres-db;Port=5432;Database=EShopOnAbp_Administration;Pooling=false;
+      - AuthServer__Authority=http://erp-st-authserver
+      - AuthServer__RequireHttpsMetadata=false
+      - Redis__Configuration=redis
+      - RabbitMQ__Connections__Default__HostName=rabbitmq    
+    depends_on:
+      redis:
+        condition: service_healthy
+      mongodb:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    restart: on-failure  
+    networks: 
+      - walsun-erp-network
+  erp-st-ordering:
+    image: walsunerp/service-ordering:latest
+    container_name: ordering-service-container
+    build:
+      context: ../../
+      dockerfile: services/ordering/src/Walsun.Erp.OrderingService.HttpApi.Host/Dockerfile
+    environment:
+      # - ASPNETCORE_ENVIRONMENT=Docker
+      - ASPNETCORE_URLS=http://+:80;
+      - App__SelfUrl=https://erp-st-ordering
+      - App__CorsOrigins=https://erp-st-gateway-web,https://erp-st-gateway-web-public,https://erp-st-web
+      - ConnectionStrings__OrderingService=User ID=postgres;Password=myPassw0rd;Host=postgres-db;Port=5432;Database=EShopOnAbp_Ordering;Pooling=false;
+      - ConnectionStrings__AdministrationService=User ID=postgres;Password=myPassw0rd;Host=postgres-db;Port=5432;Database=EShopOnAbp_Administration;Pooling=false;
+      - AuthServer__Authority=http://erp-st-authserver
+      - AuthServer__RequireHttpsMetadata=false
+      - Redis__Configuration=redis
+      - RabbitMQ__Connections__Default__HostName=rabbitmq
+    depends_on:
+      redis:
+        condition: service_healthy
+      postgres-db:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    restart: on-failure  
+    networks: 
+      - walsun-erp-network
+    # volumes:
+    #   - ./certs:/root/certificate
+  erp-st-cmskit:
+    image: walsunerp/service-cmskit:latest
+    container_name: cmskit-service-container
+    build:
+      context: ../../
+      dockerfile: services/cmskit/src/Walsun.Erp.CmskitService.HttpApi.Host/Dockerfile
+    environment:
+      # - ASPNETCORE_ENVIRONMENT=Docker
+      - ASPNETCORE_URLS=http://+:80;
+      - App__SelfUrl=https://erp-st-cmskit
+      - App__CorsOrigins=https://erp-st-gateway-web,https://erp-st-gateway-web-public
+      - ConnectionStrings__CmskitService=User ID=postgres;Password=myPassw0rd;Host=postgres-db;Port=5432;Database=EShopOnAbp_Cmskit;Pooling=false;
+      - ConnectionStrings__AdministrationService=User ID=postgres;Password=myPassw0rd;Host=postgres-db;Port=5432;Database=EShopOnAbp_Administration;Pooling=false;
+      - AuthServer__Authority=http://erp-st-authserver
+      - AuthServer__RequireHttpsMetadata=false
+      - Redis__Configuration=redis
+      - RabbitMQ__Connections__Default__HostName=rabbitmq
+      - RemoteServices__AbpIdentity__BaseUrl=erp-st-identity
+      - IdentityClients__Default__Authority=http://erp-st-identity
+    depends_on:
+      redis:
+        condition: service_healthy
+      postgres-db:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    restart: on-failure  
+    networks: 
+      - walsun-erp-network
+    # volumes:
+    #   - ./certs:/root/certificate
+  erp-st-payment:
+    image: walsunerp/service-payment:latest
+    container_name: payment-service-container
+    build:
+      context: ../../
+      dockerfile: services/payment/src/Walsun.Erp.PaymentService.HttpApi.Host/Dockerfile
+    environment:
+      # - ASPNETCORE_ENVIRONMENT=Docker
+      - ASPNETCORE_URLS=http://+:80;
+      - App__SelfUrl=https://erp-st-payment
+      - App__CorsOrigins=https://erp-st-gateway-web,https://erp-st-gateway-web-public      
+      - ConnectionStrings__PaymentService=User ID=postgres;Password=myPassw0rd;Host=postgres-db;Port=5432;Database=EShopOnAbp_Payment;Pooling=false;
+      - ConnectionStrings__AdministrationService=User ID=postgres;Password=myPassw0rd;Host=postgres-db;Port=5432;Database=EShopOnAbp_Administration;Pooling=false;
+      - AuthServer__Authority=http://erp-st-authserver
+      - AuthServer__RequireHttpsMetadata=false
+      - Redis__Configuration=redis
+      - RabbitMQ__Connections__Default__HostName=rabbitmq
+      - Payment__PayPal__ClientId=PAYPAL_CLIENT_ID
+      - Payment__PayPal__Secret=PAYPAL_SECRET
+      - Payment__PayPal__Environment=Sandbox
+    depends_on:
+      redis:
+        condition: service_healthy
+      postgres-db:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    restart: on-failure  
+    networks: 
+      - walsun-erp-network
+  erp-st-authserver:
+    image: walsunerp/app-authserver:latest
+    container_name: app-authserver-container
+    build:
+      context: ../../
+      dockerfile: apps/auth-server/src/Walsun.Erp.AuthServer/Dockerfile
+    environment:
+      # - ASPNETCORE_ENVIRONMENT=Docker
+      - ASPNETCORE_URLS=http://+:80;
+      - App__SelfUrl=https://erp-st-authserver
+      - App__CorsOrigins=https://erp-st-web,https://erp-st-public-web,https://erp-st-identity,http://erp-st-administration,https://erp-st-administration,https://erp-st-catalog,https://erp-st-basket,https://erp-st-ordering,https://erp-st-cmskit,https://erp-st-payment
+      - App__RedirectAllowedUrls=http://erp-st-web
+      - AuthServer__Authority=http://erp-st-authserver
+      - AuthServer__RequireHttpsMetadata=false
+      - ConnectionStrings__IdentityService=User ID=postgres;Password=myPassw0rd;Host=postgres-db;Port=5432;Database=EShopOnAbp_Identity;Pooling=false;
+      - ConnectionStrings__AdministrationService=User ID=postgres;Password=myPassw0rd;Host=postgres-db;Port=5432;Database=EShopOnAbp_Administration;Pooling=false;   
+      - Redis__Configuration=redis
+      - RabbitMQ__Connections__Default__HostName=rabbitmq
+    depends_on:
+      redis:
+        condition: service_healthy
+      postgres-db:
+        condition: service_healthy  
+      rabbitmq:
+        condition: service_healthy
+    restart: on-failure  
+    networks: 
+      - walsun-erp-network
+  erp-st-web:
+    image: walsunerp/app-web:latest
+    container_name: app-web-container
+    build:
+      context: ../../
+      dockerfile: apps/angular/Dockerfile
+    volumes:
+      - ./nginx/dynamic-env.json:/usr/share/nginx/html/dynamic-env.json
+    depends_on:
+      redis:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    restart: on-failure
+    networks: 
+      - walsun-erp-network
+  erp-st-public-web:
+    image: walsunerp/app-publicweb:latest
+    container_name: app-publicweb-container
+    build:
+      context: ../../
+      dockerfile: apps/public-web/src/Walsun.Erp.PublicWeb/Dockerfile
+    environment:
+      # - ASPNETCORE_ENVIRONMENT=Docker
+      - ASPNETCORE_URLS=http://+:80;
+      - App__SelfUrl=https://erp-st-public-web
+      - AuthServer__Authority=http://erp-st-authserver
+      - AuthServer__RequireHttpsMetadata=false
+      - RemoteServices__Default__BaseUrl=http://erp-st-gateway-web-public/                
+      - Redis__Configuration=redis
+      - RabbitMQ__Connections__Default__HostName=rabbitmq
+      - ReverseProxy__Clusters__cluster1__Destinations__destination1__Address=http://erp-st-gateway-web-public
+    depends_on:
+      redis:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    restart: on-failure  
+    networks: 
+      - walsun-erp-network
+  erp-st-gateway-web:
+    image: walsunerp/gateway-web:latest
+    container_name: gateway-web-container
+    build:
+      context: ../../
+      dockerfile: gateways/web/src/Walsun.Erp.WebGateway/Dockerfile
+    environment:
+      #- ASPNETCORE_ENVIRONMENT=Docker # Yarp can't resolve dns, needs to be overridden
+      - ASPNETCORE_URLS=http://+:80;
+      - App__SelfUrl=https://erp-st-gateway-web
+      - App__CorsOrigins=https://erp-st-web
+      - AuthServer__Authority=http://erp-st-authserver
+      - AuthServer__RequireHttpsMetadata=false
+      - Redis__Configuration=redis
+      - ReverseProxy__Clusters__accountCluster__Destinations__destination1__Address=http://erp-st-authserver
+      - ReverseProxy__Clusters__identityCluster__Destinations__destination1__Address=http://erp-st-identity
+      - ReverseProxy__Clusters__administrationCluster__Destinations__destination1__Address=http://erp-st-administration
+      - ReverseProxy__Clusters__catalogCluster__Destinations__destination1__Address=http://erp-st-catalog
+      - ReverseProxy__Clusters__orderingCluster__Destinations__destination1__Address=http://erp-st-ordering
+      - ReverseProxy__Clusters__cmskitCluster__Destinations__destination1__Address=http://erp-st-cmskit
+      - ReverseProxy__Clusters__feature-management-cluster__Destinations__destination1__Address=http://erp-st-administration
+      - ReverseProxy__Clusters__permission-management-cluster__Destinations__destination1__Address=http://erp-st-administration
+      - ReverseProxy__Clusters__setting-management-cluster__Destinations__destination1__Address=http://erp-st-administration
+    depends_on:
+      redis:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    restart: on-failure  
+    networks: 
+      - walsun-erp-network
+  erp-st-gateway-web-public:
+    image: walsunerp/gateway-web-public:latest
+    container_name: gateway-web-public-container
+    build:
+      context: ../../
+      dockerfile: gateways/web-public/src/Walsun.Erp.WebPublicGateway/Dockerfile
+    environment:
+      # - ASPNETCORE_ENVIRONMENT=Docker # Yarp can't resolve dns, needs to be overridden
+      - ASPNETCORE_URLS=http://+:80;
+      - App__SelfUrl=https://erp-st-gateway-web-public
+      - AuthServer__Authority=http://erp-st-authserver
+      - AuthServer__RequireHttpsMetadata=false
+      - Redis__Configuration=redis
+      - ReverseProxy__Clusters__accountCluster__Destinations__destination1__Address=http://erp-st-authserver
+      - ReverseProxy__Clusters__administrationCluster__Destinations__destination1__Address=http://erp-st-administration
+      - ReverseProxy__Clusters__catalogCluster__Destinations__destination1__Address=http://erp-st-catalog
+      - ReverseProxy__Clusters__basketCluster__Destinations__destination1__Address=http://erp-st-basket
+      - ReverseProxy__Clusters__orderingCluster__Destinations__destination1__Address=http://erp-st-ordering
+      - ReverseProxy__Clusters__cmskitCluster__Destinations__destination1__Address=http://erp-st-cmskit
+      - ReverseProxy__Clusters__paymentCluster__Destinations__destination1__Address=http://erp-st-payment
+      - ReverseProxy__Clusters__productPictureCluster__Destinations__destination1__Address=http://erp-st-catalog
+    depends_on:
+      redis:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    restart: on-failure  
+    networks: 
+      - walsun-erp-network
+
+networks:
+  walsun-erp-network:
+    external: true

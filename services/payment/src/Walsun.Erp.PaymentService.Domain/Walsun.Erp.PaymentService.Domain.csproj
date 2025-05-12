@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <RootNamespace>Walsun.Erp.PaymentService</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.Ddd.Domain" Version="9.0.0" />
+    <ProjectReference Include="..\Walsun.Erp.PaymentService.Domain.Shared\Walsun.Erp.PaymentService.Domain.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\ordering\src\Walsun.Erp.OrderingService.Domain.Shared\Walsun.Erp.OrderingService.Domain.Shared.csproj" />
+    <ProjectReference Include="..\..\..\..\shared\Walsun.Erp.Shared.Hosting\Walsun.Erp.Shared.Hosting.csproj" />
+  </ItemGroup>
+
+</Project>

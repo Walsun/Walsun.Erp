@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <RootNamespace>Walsun.Erp.PaymentService</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="PayPalCheckoutSdk" Version="1.0.4" />
+    <PackageReference Include="Volo.Abp.AutoMapper" Version="9.0.0" />
+    <PackageReference Include="Volo.Abp.Ddd.Application" Version="9.0.0" />
+    <ProjectReference Include="..\Walsun.Erp.PaymentService.Application.Contracts\Walsun.Erp.PaymentService.Application.Contracts.csproj" />
+    <ProjectReference Include="..\Walsun.Erp.PaymentService.Domain\Walsun.Erp.PaymentService.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

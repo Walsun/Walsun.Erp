@@ -1,0 +1,46 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "declaration": false,
+    "downlevelIteration": true,
+    "experimentalDecorators": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "target": "ES2022",
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "lib": [
+      "es2018",
+      "dom"
+    ],
+    "paths": {
+      "@walsunerp/catalog/config": [
+        "node_modules/@walsunerp/catalog/config",
+        "projects/catalog/config/src/public-api.ts"
+      ],
+      "@walsunerp/catalog": [
+        "node_modules/@walsunerp/catalog",
+        "projects/catalog/src/public-api.ts"
+      ],
+      "@walsunerp/ordering/config": [
+        "node_modules/@walsunerp/ordering/config",
+        "projects/ordering/config/src/public-api.ts"
+      ],
+      "@walsunerp/ordering": [
+        "node_modules/@walsunerp/ordering",
+        "projects/ordering/src/public-api.ts"
+      ]
+    },
+    "useDefineForClassFields": false
+  },
+  "angularCompilerOptions": {
+    "fullTemplateTypeCheck": true,
+    "strictInjectionParameters": true,
+    "enableIvy": true
+  }
+}

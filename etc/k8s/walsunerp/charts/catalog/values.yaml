@@ -1,0 +1,36 @@
+config:
+  selfUrl: # https://erp-st-catalog
+  corsOrigins: # https://erp-st-gateway-web,https://erp-st-gateway-public-web,https://erp-st-public,https://erp-st-web
+  connectionStrings:
+    catalogService: #
+    administrationService: #
+  authServer:
+    authority: http://erp-st-authserver
+    requireHttpsMetadata: "false"
+    metadataAddress: http://erp-st-keycloak:8080
+    swaggerClientId: WebGateway_Swagger
+  dotnetEnv: Staging
+  redisHost: erp-st-redis
+  rabbitmqHost: erp-st-rabbitmq
+  elasticsearchHost: erp-st-elasticsearch
+  stringEncryptionDefaultPassPhrase: gsKnGZ041HLL4IM8
+  grpcPort: 81
+  kestrel:
+    httpUrl: http://erp-st-catalog:8080
+    httpProtocols: Http1AndHttp2
+    grpcUrl: http://erp-st-catalog:81
+    grpcProtocols: Http2
+
+ingress:
+  host: erp-st-catalog
+  tlsSecret: erp-wildcard-tls
+
+image:
+  repository: walsunerp/service-catalog
+  tag: latest
+  pullPolicy: IfNotPresent
+
+env: {
+  # ASPNETCORE_URLS=http://+:80;http://+:81
+}
+    

@@ -1,0 +1,1 @@
+helm upgrade --install erp-st walsunerp -f ./walsunerp/values.st.yaml --namespace erp --create-namespace

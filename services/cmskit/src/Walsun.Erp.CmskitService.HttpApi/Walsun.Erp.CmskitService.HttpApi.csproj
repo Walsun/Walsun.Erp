@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <RootNamespace>Walsun.Erp.CmskitService</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.AspNetCore.Mvc" Version="9.0.0" />
+    <PackageReference Include="Volo.CmsKit.HttpApi" Version="9.0.0" />
+    <ProjectReference Include="..\Walsun.Erp.CmskitService.Application.Contracts\Walsun.Erp.CmskitService.Application.Contracts.csproj" />
+  </ItemGroup>
+
+</Project>

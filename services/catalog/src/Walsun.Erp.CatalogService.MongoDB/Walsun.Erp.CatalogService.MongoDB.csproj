@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <RootNamespace>Walsun.Erp.CatalogService</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.MongoDB" Version="9.0.0" />
+    <ProjectReference Include="..\Walsun.Erp.CatalogService.Domain\Walsun.Erp.CatalogService.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <RootNamespace>Walsun.Erp.OrderingService</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.AspNetCore.Mvc" Version="9.0.0" />
+    <ProjectReference Include="..\Walsun.Erp.OrderingService.Application.Contracts\Walsun.Erp.OrderingService.Application.Contracts.csproj" />
+  </ItemGroup>
+
+</Project>

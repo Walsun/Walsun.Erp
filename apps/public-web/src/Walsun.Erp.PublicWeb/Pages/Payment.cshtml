@@ -1,0 +1,17 @@
+﻿@page
+@using Walsun.Erp.Localization
+@using Walsun.Erp.PublicWeb.Components.Payment
+@using Microsoft.Extensions.Localization
+@model Walsun.Erp.PublicWeb.Pages.PaymentModel
+
+@inject IStringLocalizer<WalsunErpResource> L
+
+@section scripts {
+    <abp-script src="/Pages/payment.js"/>
+}
+
+<div class="row">
+    <div id="PaymentArea">
+        @await Component.InvokeAsync(typeof(PaymentWidgetViewComponent))
+    </div>
+</div>

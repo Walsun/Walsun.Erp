@@ -1,0 +1,36 @@
+config:
+  selfUrl: # https://erp-st-administration
+  corsOrigins: # https://erp-st-gateway-web,https://erp-st-gateway-public-web
+  connectionStrings:
+    administrationService: #
+  authServer:
+    authority: http://erp-st-keycloak:8080
+    requireHttpsMetadata: "false"
+    metadataAddress: http://erp-st-keycloak:8080
+    swaggerClientId: WebGateway_Swagger
+  remoteServices:
+    abpIdentityBaseUrl: #
+    useCurrentToken: "false"
+  dotnetEnv: Staging
+  redisHost: erp-st-redis
+  rabbitmqHost: erp-st-rabbitmq
+  elasticsearchHost: #
+  stringEncryptionDefaultPassPhrase: gsKnGZ041HLL4IM8
+
+synchedCommunication:
+  grantType: # "client_credentials"
+  clientId: # 
+  clientSecret: #
+  authority: # "https://erp-st-authserver"
+  scope: # "IdentityService"
+
+ingress:
+  host: administration.walsunerp.dev
+  tlsSecret: erp-wildcard-tls
+
+image:
+  repository: walsunerp/service-administration
+  tag: latest
+  pullPolicy: IfNotPresent
+
+env: {}

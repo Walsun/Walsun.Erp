@@ -1,0 +1,49 @@
+config:
+  selfUrl: # https://erp-st-identity
+  corsOrigins: # https://erp-st-gateway-web,https://erp-st-gateway-public-web,https://erp-st-gateway-internal
+  connectionStrings:
+    identityService: #
+    administrationService: #
+  authServer:
+    authority: http://erp-st-authserver
+    requireHttpsMetadata: "false"
+    metadataAddress: http://erp-st-keycloak:8080
+    swaggerClientId: WebGateway_Swagger
+  keycloak:
+    url: http://erp-st-keycloak:8080
+    adminUsername: admin
+    adminPassword: 1q2w3E*
+    realmName: master
+  dotnetEnv: Staging
+  redisHost: erp-st-redis
+  rabbitmqHost: erp-st-rabbitmq
+  elasticsearchHost: erp-st-elasticsearch
+  stringEncryptionDefaultPassPhrase: gsKnGZ041HLL4IM8
+
+# Seeded clients 
+keycloakClients:
+  webRootUrl: #  
+  publicWebRootUrl: #
+  webGatewayRootUrl: #
+  publicWebGatewayRootUrl: #
+  accountServiceRootUrl: #  
+  identityServiceRootUrl: #
+  administrationServiceRootUrl: #
+  basketServiceRootUrl: #
+  catalogServiceRootUrl: #
+  orderingServiceRootUrl: #
+  paymentServiceRootUrl: #
+  cmskitServiceRootUrl: #
+  
+
+ingress:
+  host: erp-st-identity
+  tlsSecret: erp-wildcard-tls
+
+image:
+  repository: walsunerp/service-identity
+  tag: latest
+  pullPolicy: IfNotPresent
+
+env: {}
+    

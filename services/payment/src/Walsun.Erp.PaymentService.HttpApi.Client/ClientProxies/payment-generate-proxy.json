@@ -1,0 +1,258 @@
+{
+  "modules": {
+    "payment": {
+      "rootPath": "payment",
+      "remoteServiceName": "PaymentService",
+      "controllers": {
+        "Walsun.Erp.PaymentService.Controllers.PaymentMethodController": {
+          "controllerName": "PaymentMethod",
+          "controllerGroupName": "PaymentMethod",
+          "type": "Walsun.Erp.PaymentService.Controllers.PaymentMethodController",
+          "interfaces": [
+            {
+              "type": "Walsun.Erp.PaymentService.PaymentMethods.IPaymentMethodAppService"
+            }
+          ],
+          "actions": {
+            "GetListAsync": {
+              "uniqueName": "GetListAsync",
+              "name": "GetListAsync",
+              "httpMethod": "GET",
+              "url": "api/payment/methods",
+              "supportedVersions": [],
+              "parametersOnMethod": [],
+              "parameters": [],
+              "returnValue": {
+                "type": "System.Collections.Generic.List<Walsun.Erp.PaymentService.PaymentMethods.PaymentMethodDto>",
+                "typeSimple": "[Walsun.Erp.PaymentService.PaymentMethods.PaymentMethodDto]"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "Walsun.Erp.PaymentService.PaymentMethods.IPaymentMethodAppService"
+            }
+          }
+        },
+        "Walsun.Erp.PaymentService.Controllers.PaymentRequestController": {
+          "controllerName": "PaymentRequest",
+          "controllerGroupName": "PaymentRequest",
+          "type": "Walsun.Erp.PaymentService.Controllers.PaymentRequestController",
+          "interfaces": [
+            {
+              "type": "Walsun.Erp.PaymentService.PaymentRequests.IPaymentRequestAppService"
+            }
+          ],
+          "actions": {
+            "CompleteAsyncByPaymentMethodAndInput": {
+              "uniqueName": "CompleteAsyncByPaymentMethodAndInput",
+              "name": "CompleteAsync",
+              "httpMethod": "POST",
+              "url": "api/payment/requests/{paymentMethod}/complete",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "paymentMethod",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "input",
+                  "typeAsString": "Walsun.Erp.PaymentService.PaymentRequests.PaymentRequestCompleteInputDto, Walsun.Erp.PaymentService.Application.Contracts",
+                  "type": "Walsun.Erp.PaymentService.PaymentRequests.PaymentRequestCompleteInputDto",
+                  "typeSimple": "Walsun.Erp.PaymentService.PaymentRequests.PaymentRequestCompleteInputDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "paymentMethod",
+                  "name": "paymentMethod",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "Walsun.Erp.PaymentService.PaymentRequests.PaymentRequestCompleteInputDto",
+                  "typeSimple": "Walsun.Erp.PaymentService.PaymentRequests.PaymentRequestCompleteInputDto",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "Walsun.Erp.PaymentService.PaymentRequests.PaymentRequestDto",
+                "typeSimple": "Walsun.Erp.PaymentService.PaymentRequests.PaymentRequestDto"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "Walsun.Erp.PaymentService.PaymentRequests.IPaymentRequestAppService"
+            },
+            "CreateAsyncByInput": {
+              "uniqueName": "CreateAsyncByInput",
+              "name": "CreateAsync",
+              "httpMethod": "POST",
+              "url": "api/payment/requests",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "Walsun.Erp.PaymentService.PaymentRequests.PaymentRequestCreationDto, Walsun.Erp.PaymentService.Application.Contracts",
+                  "type": "Walsun.Erp.PaymentService.PaymentRequests.PaymentRequestCreationDto",
+                  "typeSimple": "Walsun.Erp.PaymentService.PaymentRequests.PaymentRequestCreationDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "Walsun.Erp.PaymentService.PaymentRequests.PaymentRequestCreationDto",
+                  "typeSimple": "Walsun.Erp.PaymentService.PaymentRequests.PaymentRequestCreationDto",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "Walsun.Erp.PaymentService.PaymentRequests.PaymentRequestDto",
+                "typeSimple": "Walsun.Erp.PaymentService.PaymentRequests.PaymentRequestDto"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "Walsun.Erp.PaymentService.PaymentRequests.IPaymentRequestAppService"
+            },
+            "HandleWebhookAsyncByPaymentMethodAndPayload": {
+              "uniqueName": "HandleWebhookAsyncByPaymentMethodAndPayload",
+              "name": "HandleWebhookAsync",
+              "httpMethod": "POST",
+              "url": "api/payment/requests/{paymentMethod}/webhook",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "paymentMethod",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "payload",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "paymentMethod",
+                  "name": "paymentMethod",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "payload",
+                  "name": "payload",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Boolean",
+                "typeSimple": "boolean"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "Walsun.Erp.PaymentService.PaymentRequests.IPaymentRequestAppService"
+            },
+            "StartAsyncByPaymentMethodAndInput": {
+              "uniqueName": "StartAsyncByPaymentMethodAndInput",
+              "name": "StartAsync",
+              "httpMethod": "POST",
+              "url": "api/payment/requests/{paymentMethod}/start",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "paymentMethod",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "input",
+                  "typeAsString": "Walsun.Erp.PaymentService.PaymentRequests.PaymentRequestStartDto, Walsun.Erp.PaymentService.Application.Contracts",
+                  "type": "Walsun.Erp.PaymentService.PaymentRequests.PaymentRequestStartDto",
+                  "typeSimple": "Walsun.Erp.PaymentService.PaymentRequests.PaymentRequestStartDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "paymentMethod",
+                  "name": "paymentMethod",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "Walsun.Erp.PaymentService.PaymentRequests.PaymentRequestStartDto",
+                  "typeSimple": "Walsun.Erp.PaymentService.PaymentRequests.PaymentRequestStartDto",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "Walsun.Erp.PaymentService.PaymentRequests.PaymentRequestStartResultDto",
+                "typeSimple": "Walsun.Erp.PaymentService.PaymentRequests.PaymentRequestStartResultDto"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "Walsun.Erp.PaymentService.PaymentRequests.IPaymentRequestAppService"
+            }
+          }
+        }
+      }
+    }
+  },
+  "types": {}
+}

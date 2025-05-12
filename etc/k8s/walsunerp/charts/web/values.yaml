@@ -1,0 +1,18 @@
+config:
+  selfUrl: https://admin.walsunerp.com
+  gatewayUrl: https://www.gateway.walsunerp.com/
+  authServer:
+    authority: https://auth.walsunchem.com
+    requireHttpsMetadata: "false"
+    responseType: "code"
+ingress:
+  host: erp-st-web
+  tlsSecret: erp-wildcard-tls
+
+image:
+  repository: walsunerp/app-web
+  tag: latest
+  pullPolicy: IfNotPresent
+
+# Extra environment variables or configurations
+env: {}

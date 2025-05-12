@@ -1,0 +1,17 @@
+﻿@page
+@using Walsun.Erp.Localization
+@using Walsun.Erp.PublicWeb.Components.Basket
+@using Microsoft.Extensions.Localization
+@model Walsun.Erp.PublicWeb.Pages.BasketModel
+
+@section scripts {
+    <abp-script src="/client-proxies/basket-proxy.js"/>
+}
+
+@inject IStringLocalizer<WalsunErpResource> L
+
+<div class="row">
+    <div id="BasketArea">
+        @await Component.InvokeAsync(typeof(BasketWidgetViewComponent))
+    </div>
+</div>

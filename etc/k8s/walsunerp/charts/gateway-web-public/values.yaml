@@ -1,0 +1,45 @@
+config:
+  selfUrl: https://erp-st-gateway-public-web
+  isOnK8s: "true"
+  authServer:
+    authority: http://erp-st-authserver
+    requireHttpsMetadata: "false"
+    swaggerClientId: WebGateway_Swagger
+  dotnetEnv: Staging 
+  redisHost: erp-st-redis
+  rabbitmqHost: erp-st-rabbitmq
+  elasticsearchHost: erp-st-elasticsearch
+
+reRoutes:
+  identityService:
+    url: http://erp-st-identity
+    dns: https://identity.walsunerp.dev
+  administrationService:
+    url: http://erp-st-administration
+    dns: https://administration.walsunerp.dev
+  catalogService:
+    url: http://erp-st-catalog
+    dns: https://catalog.walsunerp.dev
+  basketService:
+    url: http://erp-st-basket
+    dns: https://basket.walsunerp.dev
+  orderingService:
+    url: http://erp-st-ordering
+    dns: https://ordering.walsunerp.dev
+  cmskitService:
+    url: http://erp-st-cmskit
+    dns: https://cmskit.walsunerp.dev
+  paymentService:
+    url: http://erp-st-payment
+    dns: https://payment.walsunerp.dev
+
+ingress:
+  host: erp-st-gateway-web-public
+  tlsSecret: erp-wildcard-tls
+
+image:
+  repository: walsunerp/gateway-web-public
+  tag: latest
+  pullPolicy: IfNotPresent
+
+env: {}

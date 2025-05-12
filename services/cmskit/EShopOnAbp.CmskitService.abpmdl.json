@@ -1,0 +1,58 @@
+{
+  "folders": {
+    "items": {
+      "src": {},
+      "test": {}
+    }
+  },
+  "packages": {
+    "Walsun.Erp.CmskitService.Domain.Shared": {
+      "path": "src/Walsun.Erp.CmskitService.Domain.Shared/Walsun.Erp.CmskitService.Domain.Shared.abppkg.json",
+      "folder": "src"
+    },
+    "Walsun.Erp.CmskitService.Application.Contracts": {
+      "path": "src/Walsun.Erp.CmskitService.Application.Contracts/Walsun.Erp.CmskitService.Application.Contracts.abppkg.json",
+      "folder": "src"
+    },
+    "Walsun.Erp.CmskitService.Domain": {
+      "path": "src/Walsun.Erp.CmskitService.Domain/Walsun.Erp.CmskitService.Domain.abppkg.json",
+      "folder": "src"
+    },
+    "Walsun.Erp.CmskitService.Application": {
+      "path": "src/Walsun.Erp.CmskitService.Application/Walsun.Erp.CmskitService.Application.abppkg.json",
+      "folder": "src"
+    },
+    "Walsun.Erp.CmskitService.EntityFrameworkCore": {
+      "path": "src/Walsun.Erp.CmskitService.EntityFrameworkCore/Walsun.Erp.CmskitService.EntityFrameworkCore.abppkg.json",
+      "folder": "src"
+    },
+    "Walsun.Erp.CmskitService.HttpApi": {
+      "path": "src/Walsun.Erp.CmskitService.HttpApi/Walsun.Erp.CmskitService.HttpApi.abppkg.json",
+      "folder": "src"
+    },
+    "Walsun.Erp.CmskitService.HttpApi.Client": {
+      "path": "src/Walsun.Erp.CmskitService.HttpApi.Client/Walsun.Erp.CmskitService.HttpApi.Client.abppkg.json",
+      "folder": "src"
+    },
+    "Walsun.Erp.CmskitService.HttpApi.Host": {
+      "path": "src/Walsun.Erp.CmskitService.HttpApi.Host/Walsun.Erp.CmskitService.HttpApi.Host.abppkg.json",
+      "folder": "src"
+    },
+    "Walsun.Erp.CmskitService.Domain.Tests": {
+      "path": "test/Walsun.Erp.CmskitService.Domain.Tests/Walsun.Erp.CmskitService.Domain.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "Walsun.Erp.CmskitService.EntityFrameworkCore.Tests": {
+      "path": "test/Walsun.Erp.CmskitService.EntityFrameworkCore.Tests/Walsun.Erp.CmskitService.EntityFrameworkCore.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "Walsun.Erp.CmskitService.TestBase": {
+      "path": "test/Walsun.Erp.CmskitService.TestBase/Walsun.Erp.CmskitService.TestBase.abppkg.json",
+      "folder": "test"
+    },
+    "Walsun.Erp.CmskitService.Application.Tests": {
+      "path": "test/Walsun.Erp.CmskitService.Application.Tests/Walsun.Erp.CmskitService.Application.Tests.abppkg.json",
+      "folder": "test"
+    }
+  }
+}

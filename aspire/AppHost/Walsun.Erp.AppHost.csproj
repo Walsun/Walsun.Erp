@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Sdk Name="Aspire.AppHost.Sdk" Version="9.0.0" />
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <IsAspireHost>true</IsAspireHost>
+    <UserSecretsId>40d1d3f9-6593-4f5a-9d74-ff6ea82eb14e</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Aspire.Hosting.AppHost" Version="9.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\apps\public-web\src\Walsun.Erp.PublicWeb\Walsun.Erp.PublicWeb.csproj" />
+    <ProjectReference Include="..\..\gateways\web-public\src\Walsun.Erp.WebPublicGateway\Walsun.Erp.WebPublicGateway.csproj" />
+    <ProjectReference Include="..\..\gateways\web\src\Walsun.Erp.WebGateway\Walsun.Erp.WebGateway.csproj" />
+    <ProjectReference Include="..\..\services\administration\src\Walsun.Erp.AdministrationService.HttpApi.Host\Walsun.Erp.AdministrationService.HttpApi.Host.csproj" />
+    <ProjectReference Include="..\..\services\basket\src\Walsun.Erp.BasketService\Walsun.Erp.BasketService.csproj" />
+    <ProjectReference Include="..\..\services\catalog\src\Walsun.Erp.CatalogService.HttpApi.Host\Walsun.Erp.CatalogService.HttpApi.Host.csproj" />
+    <ProjectReference Include="..\..\services\cmskit\src\Walsun.Erp.CmskitService.HttpApi.Host\Walsun.Erp.CmskitService.HttpApi.Host.csproj" />
+    <ProjectReference Include="..\..\services\identity\src\Walsun.Erp.IdentityService.HttpApi.Host\Walsun.Erp.IdentityService.HttpApi.Host.csproj" />
+    <ProjectReference Include="..\..\services\ordering\src\Walsun.Erp.OrderingService.HttpApi.Host\Walsun.Erp.OrderingService.HttpApi.Host.csproj" />
+    <ProjectReference Include="..\..\services\payment\src\Walsun.Erp.PaymentService.HttpApi.Host\Walsun.Erp.PaymentService.HttpApi.Host.csproj" />
+    <ProjectReference Include="..\..\shared\Walsun.Erp.Keycloak.DbMigrator\Walsun.Erp.Keycloak.DbMigrator.csproj" />
+  </ItemGroup>
+
+</Project>

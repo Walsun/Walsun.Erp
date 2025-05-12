@@ -1,0 +1,389 @@
+{
+  "modules": {
+    "ordering": {
+      "rootPath": "ordering",
+      "remoteServiceName": "Ordering",
+      "controllers": {
+        "Walsun.Erp.OrderingService.Orders.OrderAppService": {
+          "controllerName": "Order",
+          "controllerGroupName": "Order",
+          "type": "Walsun.Erp.OrderingService.Orders.OrderAppService",
+          "interfaces": [
+            {
+              "type": "Volo.Abp.Validation.IValidationEnabled"
+            },
+            {
+              "type": "Volo.Abp.Auditing.IAuditingEnabled"
+            },
+            {
+              "type": "Volo.Abp.GlobalFeatures.IGlobalFeatureCheckingEnabled"
+            },
+            {
+              "type": "Walsun.Erp.OrderingService.Orders.IOrderAppService"
+            }
+          ],
+          "actions": {
+            "GetAsyncById": {
+              "uniqueName": "GetAsyncById",
+              "name": "GetAsync",
+              "httpMethod": "GET",
+              "url": "api/ordering/order/{id}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "Walsun.Erp.OrderingService.Orders.OrderDto",
+                "typeSimple": "Walsun.Erp.OrderingService.Orders.OrderDto"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "Walsun.Erp.OrderingService.Orders.IOrderAppService"
+            },
+            "GetMyOrdersAsyncByInput": {
+              "uniqueName": "GetMyOrdersAsyncByInput",
+              "name": "GetMyOrdersAsync",
+              "httpMethod": "GET",
+              "url": "api/ordering/order/my-orders",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "Walsun.Erp.OrderingService.Orders.GetMyOrdersInput, Walsun.Erp.OrderingService.Application.Contracts",
+                  "type": "Walsun.Erp.OrderingService.Orders.GetMyOrdersInput",
+                  "typeSimple": "Walsun.Erp.OrderingService.Orders.GetMyOrdersInput",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "Filter",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                }
+              ],
+              "returnValue": {
+                "type": "System.Collections.Generic.List<Walsun.Erp.OrderingService.Orders.OrderDto>",
+                "typeSimple": "[Walsun.Erp.OrderingService.Orders.OrderDto]"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "Walsun.Erp.OrderingService.Orders.IOrderAppService"
+            },
+            "GetOrdersAsyncByInput": {
+              "uniqueName": "GetOrdersAsyncByInput",
+              "name": "GetOrdersAsync",
+              "httpMethod": "GET",
+              "url": "api/ordering/order/orders",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "Walsun.Erp.OrderingService.Orders.GetOrdersInput, Walsun.Erp.OrderingService.Application.Contracts",
+                  "type": "Walsun.Erp.OrderingService.Orders.GetOrdersInput",
+                  "typeSimple": "Walsun.Erp.OrderingService.Orders.GetOrdersInput",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "Filter",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                }
+              ],
+              "returnValue": {
+                "type": "System.Collections.Generic.List<Walsun.Erp.OrderingService.Orders.OrderDto>",
+                "typeSimple": "[Walsun.Erp.OrderingService.Orders.OrderDto]"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "Walsun.Erp.OrderingService.Orders.IOrderAppService"
+            },
+            "GetListPagedAsyncByInput": {
+              "uniqueName": "GetListPagedAsyncByInput",
+              "name": "GetListPagedAsync",
+              "httpMethod": "GET",
+              "url": "api/ordering/order/paged",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "Volo.Abp.Application.Dtos.PagedAndSortedResultRequestDto, Volo.Abp.Ddd.Application.Contracts",
+                  "type": "Volo.Abp.Application.Dtos.PagedAndSortedResultRequestDto",
+                  "typeSimple": "Volo.Abp.Application.Dtos.PagedAndSortedResultRequestDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "Sorting",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "SkipCount",
+                  "jsonName": null,
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "MaxResultCount",
+                  "jsonName": null,
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                }
+              ],
+              "returnValue": {
+                "type": "Volo.Abp.Application.Dtos.PagedResultDto<Walsun.Erp.OrderingService.Orders.OrderDto>",
+                "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<Walsun.Erp.OrderingService.Orders.OrderDto>"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "Walsun.Erp.OrderingService.Orders.IOrderAppService"
+            },
+            "GetDashboardAsyncByInput": {
+              "uniqueName": "GetDashboardAsyncByInput",
+              "name": "GetDashboardAsync",
+              "httpMethod": "GET",
+              "url": "api/ordering/order/dashboard",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "Walsun.Erp.OrderingService.Orders.DashboardInput, Walsun.Erp.OrderingService.Application.Contracts",
+                  "type": "Walsun.Erp.OrderingService.Orders.DashboardInput",
+                  "typeSimple": "Walsun.Erp.OrderingService.Orders.DashboardInput",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "Filter",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                }
+              ],
+              "returnValue": {
+                "type": "Walsun.Erp.OrderingService.Orders.DashboardDto",
+                "typeSimple": "Walsun.Erp.OrderingService.Orders.DashboardDto"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "Walsun.Erp.OrderingService.Orders.IOrderAppService"
+            },
+            "GetByOrderNoAsyncByOrderNo": {
+              "uniqueName": "GetByOrderNoAsyncByOrderNo",
+              "name": "GetByOrderNoAsync",
+              "httpMethod": "GET",
+              "url": "api/ordering/order/by-order-no",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "orderNo",
+                  "typeAsString": "System.Int32, System.Private.CoreLib",
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "orderNo",
+                  "name": "orderNo",
+                  "jsonName": null,
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "Walsun.Erp.OrderingService.Orders.OrderDto",
+                "typeSimple": "Walsun.Erp.OrderingService.Orders.OrderDto"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "Walsun.Erp.OrderingService.Orders.IOrderAppService"
+            },
+            "SetAsCancelledAsyncById": {
+              "uniqueName": "SetAsCancelledAsyncById",
+              "name": "SetAsCancelledAsync",
+              "httpMethod": "POST",
+              "url": "api/ordering/order/{id}/set-as-cancelled",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "Walsun.Erp.OrderingService.Orders.IOrderAppService"
+            },
+            "SetAsShippedAsyncById": {
+              "uniqueName": "SetAsShippedAsyncById",
+              "name": "SetAsShippedAsync",
+              "httpMethod": "POST",
+              "url": "api/ordering/order/{id}/set-as-shipped",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "Walsun.Erp.OrderingService.Orders.IOrderAppService"
+            },
+            "CreateAsyncByInput": {
+              "uniqueName": "CreateAsyncByInput",
+              "name": "CreateAsync",
+              "httpMethod": "POST",
+              "url": "api/ordering/order",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "Walsun.Erp.OrderingService.Orders.OrderCreateDto, Walsun.Erp.OrderingService.Application.Contracts",
+                  "type": "Walsun.Erp.OrderingService.Orders.OrderCreateDto",
+                  "typeSimple": "Walsun.Erp.OrderingService.Orders.OrderCreateDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "Walsun.Erp.OrderingService.Orders.OrderCreateDto",
+                  "typeSimple": "Walsun.Erp.OrderingService.Orders.OrderCreateDto",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "Walsun.Erp.OrderingService.Orders.OrderDto",
+                "typeSimple": "Walsun.Erp.OrderingService.Orders.OrderDto"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "Walsun.Erp.OrderingService.Orders.IOrderAppService"
+            }
+          }
+        }
+      }
+    }
+  },
+  "types": {}
+}
